@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>430</x>
+      <y>700</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Shape
+-
+this is the shape from class</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>820</y>
+      <w>350</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>Ball
+-
+-mSprite : Android.Sprite
+-mExpanding : int //-1 shrink 0 static 1 expanding
+-mVel : double
+-mAngle : double
+-
++Ball(int, int, int, Sprite, int, double, double)
++move() : void
++bounce(int) : void // 0 vertical 1 horizontal
++changeExpand(int) : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>750</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1110</x>
+      <y>830</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Android.Sprite</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>980</x>
+      <y>830</y>
+      <w>150</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>370</y>
+      <w>300</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>BoomshineModel
+-
+#maBalls : Arraylist&lt;Ball&gt;
+-maExpandingBalls : Arraylist&lt;Ball&gt;
+-mWidth : double
+-mHeight : double
+-mNumBallsForWin : int
+-mPlacedBall : bool
+-
++BoomshineModel()
++setGameSize(double, double) : void
++update() : void
++checkWin() : bool
++placeBall(int, int, int, Sprite, int) : void
++getAllBalls() : Arraylist&lt;Ball&gt; 
+ //returns maBalls and maExpandingBalls
++newRound(int) : void  
+
+-checkBoundary(Ball) : bool
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>660</y>
+      <w>30</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>700</y>
+      <w>190</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Circle
+-
+this is the circle from class</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>720</y>
+      <w>60</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>370</y>
+      <w>340</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>BoomshineView
+-
+-mBoomshinePresenter : BoomshinePresenter
+...
+-
++BoomshineView()
+
++onDraw(Canvas) : void
++onTouchEvent(Event) : bool
++newRound() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>370</y>
+      <w>390</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>BoomsinePresenter
+-
+-mBoomshineModel : BoomshineModel
+-mLives : int
+-
++BoomeshinePresenter()
+
++setGameSize(double, double)
++getBalls() : Arraylist&lt;Ball&gt;
++placeBall(int, int) : void //gets its own sprite
++newRound(int)  : void
++setLives(int) : void
++returnLives() : int
++update() : void
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>790</x>
+      <y>440</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>440</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>180</y>
+      <w>340</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>MainActivity
+-
+-mBoomshineView : BoomshineView
+...
+-
+onCreate(Bundel) : void //set view to BoomshineView
+MenuStuff...
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>180</y>
+      <w>290</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>MainMenu
+-
+creates a main menu and about page</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>330</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>220</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+</diagram>
