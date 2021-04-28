@@ -4,89 +4,71 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
-      <y>700</y>
-      <w>180</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>Shape
--
-this is the shape from class</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>640</x>
-      <y>820</y>
+      <x>610</x>
+      <y>580</y>
       <w>350</w>
       <h>210</h>
     </coordinates>
     <panel_attributes>Ball
 -
--mSprite : Android.Sprite
--mExpanding : int //-1 shrink 0 static 1 expanding
--mVel : double
--mAngle : double
+-mSprite : FixedSprite
+mExpandSprite : ExpandingSprite
+-mXVel : double
+-mYVel : double
+
 -
 +Ball(int, int, int, Sprite, int, double, double)
 +move() : void
-+bounce(int) : void // 0 vertical 1 horizontal
-+changeExpand(int) : void
++draw()
++changeExpand() : void
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>700</x>
-      <y>750</y>
-      <w>30</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1110</x>
-      <y>830</y>
-      <w>100</w>
-      <h>30</h>
+      <x>1230</x>
+      <y>590</y>
+      <w>130</w>
+      <h>110</h>
     </coordinates>
-    <panel_attributes>Android.Sprite</panel_attributes>
+    <panel_attributes>MovingSprite
+-
+-mXVel : double
+-mYVel : double</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>980</x>
-      <y>830</y>
-      <w>150</w>
+      <x>950</x>
+      <y>590</y>
+      <w>90</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>840</x>
-      <y>370</y>
+      <x>810</x>
+      <y>210</y>
       <w>300</w>
-      <h>300</h>
+      <h>320</h>
     </coordinates>
     <panel_attributes>BoomshineModel
 -
-#maBalls : Arraylist&lt;Ball&gt;
+-maBalls : Arraylist&lt;Ball&gt;
 -maExpandingBalls : Arraylist&lt;Ball&gt;
 -mWidth : double
 -mHeight : double
 -mNumBallsForWin : int
 -mPlacedBall : bool
+-mRound : int
+ // used to calculate number of balls
 -
-+BoomshineModel()
++BoomshineModel(double, double)
 +setGameSize(double, double) : void
 +update() : void
 +checkWin() : bool
@@ -95,8 +77,6 @@ this is the shape from class</panel_attributes>
  //returns maBalls and maExpandingBalls
 +newRound(int) : void  
 
--checkBoundary(Ball) : bool
-
 
 </panel_attributes>
     <additional_attributes/>
@@ -104,43 +84,19 @@ this is the shape from class</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>880</x>
-      <y>660</y>
+      <x>850</x>
+      <y>520</y>
       <w>30</w>
-      <h>180</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>640</x>
-      <y>700</y>
-      <w>190</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>Circle
--
-this is the circle from class</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>600</x>
-      <y>720</y>
-      <w>60</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>30</x>
-      <y>370</y>
+      <x>0</x>
+      <y>210</y>
       <w>340</w>
       <h>170</h>
     </coordinates>
@@ -159,8 +115,8 @@ this is the circle from class</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>410</x>
-      <y>370</y>
+      <x>380</x>
+      <y>210</y>
       <w>390</w>
       <h>230</h>
     </coordinates>
@@ -186,8 +142,8 @@ this is the circle from class</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>790</x>
-      <y>440</y>
+      <x>760</x>
+      <y>280</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -197,8 +153,8 @@ this is the circle from class</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
-      <y>440</y>
+      <x>330</x>
+      <y>280</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
@@ -208,8 +164,8 @@ this is the circle from class</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
-      <y>180</y>
+      <x>0</x>
+      <y>20</y>
       <w>340</w>
       <h>160</h>
     </coordinates>
@@ -227,8 +183,8 @@ MenuStuff...
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>410</x>
-      <y>180</y>
+      <x>380</x>
+      <y>20</y>
       <w>290</w>
       <h>70</h>
     </coordinates>
@@ -240,8 +196,8 @@ creates a main menu and about page</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
-      <y>330</y>
+      <x>150</x>
+      <y>170</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -251,12 +207,100 @@ creates a main menu and about page</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
-      <y>220</y>
+      <x>330</x>
+      <y>60</y>
       <w>70</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1430</x>
+      <y>590</y>
+      <w>120</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>FixedSprite
+-
+provided in class</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1070</x>
+      <y>800</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>ExpandingSprite
+-
+provided in class</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>950</x>
+      <y>660</y>
+      <w>140</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1350</x>
+      <y>590</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1190</x>
+      <y>600</y>
+      <w>260</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;210.0;150.0;70.0;240.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1020</x>
+      <y>590</y>
+      <w>150</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>BoundedMovingSprite
+-
+-mXMin : double
+-mYMin : double
+-mXMax : double
+-mYMax : double
+-
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1160</x>
+      <y>590</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
   </element>
 </diagram>
