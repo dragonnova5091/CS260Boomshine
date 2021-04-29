@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
-      <y>280</y>
+      <x>16</x>
+      <y>272</y>
       <w>320</w>
       <h>312</h>
     </coordinates>
@@ -15,21 +15,16 @@
 -maExpandingBalls : Arraylist&lt;ExpandingBouncingBall&gt;
 -mWidth : double
 -mHeight : double
--mNumBallsForWin : int
--mBallsPopped : int
--mRound : int
--mPlacedBall : bool
--mTotalScore ; int
+
 -
 +BoomshineGameLogic(Context, Display, double, double)
 +setGameSize(double, double) : void
 +update() : void
-+checkWin() : bool
+
 +placeBall(int, int, int, Sprite, int) : void
 +draw(Canvas) : void
 +newRound(int) : void  
-+getNumBallsforWin() : int
-+setNumBallsforWin(int ) : void
+
 
 +drawUI() : void
 +drawScore() : void
@@ -42,24 +37,24 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
-      <y>56</y>
+      <x>16</x>
+      <y>24</y>
       <w>288</w>
       <h>168</h>
     </coordinates>
-    <panel_attributes>ExpandingBouncingBall
+    <panel_attributes>ExpandingBallView
 -
 -mExpandingSpeed : int
 -mScale : float
 -mRadius : float 
 -
-+ExpandingBouncingBall(Context, Display, int,
++ExpandingBall(Context, Display, int,
           int, int, int, int, int, int, int, int, float)
 +doDraw(Canvas) : void
 +expandBall () : void
 +contractBall () : void
 +getRadius() : float
-+collide(ExpandingBouncingBall) : void
++collide(ExpandingBall) : void
 
 </panel_attributes>
     <additional_attributes/>
@@ -67,23 +62,23 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>144</y>
-      <w>64</w>
+      <x>296</x>
+      <y>112</y>
+      <w>168</w>
       <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>190.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>448</x>
-      <y>72</y>
+      <y>40</y>
       <w>248</w>
       <h>128</h>
     </coordinates>
-    <panel_attributes>BouncingBall
+    <panel_attributes>BoundedBouncingBall
 -
 -mTopBound : int
 -mBottomBound : int
@@ -99,18 +94,18 @@
     <id>Relation</id>
     <coordinates>
       <x>688</x>
-      <y>136</y>
-      <w>64</w>
+      <y>104</y>
+      <w>88</w>
       <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>736</x>
-      <y>72</y>
+      <x>760</x>
+      <y>40</y>
       <w>240</w>
       <h>160</h>
     </coordinates>
@@ -131,10 +126,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>744</x>
-      <y>272</y>
+      <x>768</x>
+      <y>264</y>
       <w>232</w>
-      <h>288</h>
+      <h>304</h>
     </coordinates>
     <panel_attributes>FixedSprite
 --
@@ -168,23 +163,57 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>840</x>
-      <y>224</y>
+      <x>864</x>
+      <y>192</y>
       <w>24</w>
-      <h>64</h>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>152</x>
-      <y>216</y>
+      <x>48</x>
+      <y>184</y>
       <w>24</w>
-      <h>80</h>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>408</x>
+      <y>280</y>
+      <w>248</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>BoomshineModel
+-
+-mNumBallsForWin : int
+-mBallsPopped : int
+-mRound : int
+-mPlacedBall : bool
+-mTotalScore : int
+-
++BoomshineModel(int) 
++checkWin() : bool
++getNumBallsforWin() : int
++setNumBallsforWin(int) : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>328</x>
+      <y>312</y>
+      <w>96</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
