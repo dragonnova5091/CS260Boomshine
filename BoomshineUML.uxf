@@ -4,31 +4,42 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>16</x>
-      <y>272</y>
+      <x>96</x>
+      <y>392</y>
       <w>320</w>
-      <h>312</h>
+      <h>384</h>
     </coordinates>
-    <panel_attributes>BoomshineGameLogic
+    <panel_attributes>BoomshineGame
 -
-#maBalls : Arraylist&lt;ExpandingBouncingBall&gt;
--maExpandingBalls : Arraylist&lt;ExpandingBouncingBall&gt;
+#maBalls : Arraylist&lt;BoundedBouncingBall&gt;
+-maExpandingBalls : Arraylist&lt;ExpandingBall&gt;
 -mWidth : double
 -mHeight : double
-
+-mRound : int
+-mNumBallsForWin : int
+-mBallsPopped : int
+-mRound : int
+-mPlacedBall : bool
+-mRoundScore : int
+-mTotalScore : int
+-mLives : int
 -
 +BoomshineGameLogic(Context, Display, double, double)
 +setGameSize(double, double) : void
 +update() : void
++checkWin () : bool
++checkLives() : bool
++handleCollision(int, int) : void
 
 +placeBall(int, int, int, Sprite, int) : void
-+draw(Canvas) : void
-+newRound(int) : void  
++newRound() : void  
++returnAllBalls() : ArrayList&lt;MovingSprite&gt;
++getScore() : int
++getTotalScore() : int 
++getBallsPopped() : int
++getRound() : int
++getNumBallsForWin() : int
 
-
-+drawUI() : void
-+drawScore() : void
-+drawGameFinish() : void
 
 
 </panel_attributes>
@@ -37,44 +48,41 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>16</x>
-      <y>24</y>
+      <x>104</x>
+      <y>144</y>
       <w>288</w>
       <h>168</h>
     </coordinates>
-    <panel_attributes>ExpandingBallView
+    <panel_attributes>ExpandingBall
 -
 -mExpandingSpeed : int
 -mScale : float
 -mRadius : float 
+-mMaxRadius : float
 -
 +ExpandingBall(Context, Display, int,
-          int, int, int, int, int, int, int, int, float)
+          int, int, int, int, int, int, int, float, float)
 +doDraw(Canvas) : void
 +expandBall () : void
-+contractBall () : void
-+getRadius() : float
-+collide(ExpandingBall) : void
-
-</panel_attributes>
++getRadius() : float</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>296</x>
-      <y>112</y>
-      <w>168</w>
-      <h>24</h>
+      <x>384</x>
+      <y>232</y>
+      <w>480</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>190.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>580.0;20.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>448</x>
-      <y>40</y>
+      <x>488</x>
+      <y>56</y>
       <w>248</w>
       <h>128</h>
     </coordinates>
@@ -93,19 +101,19 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>688</x>
-      <y>104</y>
-      <w>88</w>
-      <h>24</h>
+      <x>728</x>
+      <y>120</y>
+      <w>136</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>150.0;140.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>760</x>
-      <y>40</y>
+      <x>848</x>
+      <y>160</y>
       <w>240</w>
       <h>160</h>
     </coordinates>
@@ -126,8 +134,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>768</x>
-      <y>264</y>
+      <x>856</x>
+      <y>384</y>
       <w>232</w>
       <h>304</h>
     </coordinates>
@@ -163,8 +171,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>864</x>
-      <y>192</y>
+      <x>952</x>
+      <y>312</y>
       <w>24</w>
       <h>88</h>
     </coordinates>
@@ -174,46 +182,87 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>48</x>
-      <y>184</y>
-      <w>24</w>
+      <x>128</x>
+      <y>304</y>
+      <w>32</w>
       <h>104</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;110.0;20.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>408</x>
-      <y>280</y>
+      <x>512</x>
+      <y>376</y>
       <w>248</w>
-      <h>152</h>
+      <h>184</h>
     </coordinates>
-    <panel_attributes>BoomshineModel
+    <panel_attributes>BoomshineView
 -
--mNumBallsForWin : int
--mBallsPopped : int
--mRound : int
--mPlacedBall : bool
--mTotalScore : int
+-mBoomshine : BoomshineGame
+-mTimer : Time
 -
-+BoomshineModel(int) 
++onDraw(Canvas) : void
 +checkWin() : bool
-+getNumBallsforWin() : int
-+setNumBallsforWin(int) : void
++onDrawUI(Canvas) : void
++onTouchEvent(View) : void
++reset() : void
++quit() : void
++saveHighScores() : bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>664</y>
+      <w>248</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>MainActivity
+-
+mbtnStart : Button
+mbtnQuit : Button
+mbtnAbout : Button
+mMenu : Menu
+-
++onMenuInflate() : void
++onCreate(Bundle) : void
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>328</x>
-      <y>312</y>
-      <w>96</w>
-      <h>24</h>
+      <x>408</x>
+      <y>448</y>
+      <w>120</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;80.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>632</x>
+      <y>552</y>
+      <w>24</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>384</x>
+      <y>144</y>
+      <w>120</w>
+      <h>264</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;310.0;130.0;10.0</additional_attributes>
   </element>
 </diagram>
