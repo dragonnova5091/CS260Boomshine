@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">hunt0991huyn7539Boomshine</string>
+    <string name="str_about">Authors: Ethan Hunter, and Hung Huynh</string>
+    <string name="back">Back</string>
+    <string name="hottoplay_str">this is the how to play directions</string>
 </resources>
