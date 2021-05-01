@@ -7,29 +7,22 @@ import android.widget.ExpandableListAdapter;
 
 import edu.pacificu.cs.hunt0991huyn7539boomshine.R;
 
-public class Ball
+public class BoundedBouncingBall extends MovingSprite
 {
   private double mXVel, mYVel;
-  private MovingSprite mSprite;
-  private ExpandingSprite mExpandSprite;
 
-  public Ball( Context context, Display display, double xPos, double yPos)
+  public BoundedBouncingBall( Context context, Display display, double xPos, double yPos, int xVel,
+                              int yVel)
   {
-    mSprite = new MovingSprite( context, display, R.drawable.ball_blue,
-            (int) xPos, (int) yPos );
+    super( context, display, R.drawable.ball_blue,
+            (int) xPos, (int) yPos, xVel, yVel);
   }
-
-  public void draw( Canvas canvas)
-  {
-    mSprite.draw( canvas );
-  }
-
+  
   public void moveUpdate()
   {
 
     //update the coords with teh velocities
-    mSprite.setXUpperLeft( mSprite.getXUpperLeft() + mXVel );
-    mSprite.setYUpperLeft( mSprite.getYUpperLeft() + mXVel );
+
   }
 
   public double getXVelocity()

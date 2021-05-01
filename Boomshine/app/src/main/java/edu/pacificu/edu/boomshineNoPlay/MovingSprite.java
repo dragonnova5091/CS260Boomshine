@@ -14,7 +14,7 @@ import android.view.Display;
 public class MovingSprite extends FixedSprite
 {
 
-  private double mXVel, mYVel;
+  private double mXVel = 0, mYVel = 0;
 
   /**
    * Constructor that initializes the values associated with the sprite.
@@ -38,9 +38,11 @@ public class MovingSprite extends FixedSprite
    * @since 1.0
    */
   public MovingSprite (Context context, Display display, int drawable,
-                       int topCoord, int leftCoord)
+                       int topCoord, int leftCoord, int xVel, int yVel)
   {
     super (context, display, drawable, topCoord, leftCoord);
+    mXVel = xVel;
+    mYVel = yVel;
   }
 
   /**
@@ -65,7 +67,8 @@ public class MovingSprite extends FixedSprite
 
   public void move ()
   {
-    setXUpperLeft (this.getXUpperLeft() + 1);
+    mXUpperLeft += mXVel;
+    mYUpperLeft += mYVel;
   }
 
 }
