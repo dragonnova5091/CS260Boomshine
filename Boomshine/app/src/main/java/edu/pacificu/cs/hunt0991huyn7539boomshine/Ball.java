@@ -15,8 +15,8 @@ public class Ball
 
     public Ball( Context context, Display display, double xPos, double yPos)
     {
-        mSprite = new MovingSprite( context, display, R.drawable.ball_blue,
-                (int) xPos, (int) yPos );
+        //mSprite = new MovingSprite( context, display, R.drawable.ball_blue,
+          //      (int) xPos, (int) yPos );
     }
 
     public void draw( Canvas canvas)

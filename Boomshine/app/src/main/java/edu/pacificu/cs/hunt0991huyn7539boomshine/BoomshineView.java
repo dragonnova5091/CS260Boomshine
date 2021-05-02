@@ -16,6 +16,7 @@ public class BoomshineView extends View
 {
     private final int LIVES = 3;
     private final int LEVEL_MULTIPLIER = 5;
+    private double mVelocityMultiplier = 10;
     private Boomshine mBoomshine;
     ArrayList<ExpandingBall> mExpanding;
     ArrayList<BoundedBouncingBall> mMoving;
@@ -31,7 +32,6 @@ public class BoomshineView extends View
         super (context);
         setFocusable (true);
         mBoomshine = new Boomshine ();
-        mBoomshine.onCreate();
         mPaint = new Paint ();
         mContext = context;
         mDisplay = display;
@@ -39,15 +39,10 @@ public class BoomshineView extends View
         mMoving = new ArrayList<> ();
 
 
-        int width = mDisplay.getWidth();
-        int height = mDisplay.getHeight();
-        Random rand = new Random();
-
         Log.d("debug", "" + mBoomshine.getNumBallsForWin());
         for (int i = 0; i < mBoomshine.getNumBallsForWin() * 2; i++)
         {
-            mMoving.add(new BoundedBouncingBall( mContext, mDisplay, R.drawable.ball_green, rand.nextInt(width),
-                    rand.nextInt(height), 0, height, 0, width ));
+            addMovingBall();
         }
 
         invalidate();
@@ -68,7 +63,9 @@ public class BoomshineView extends View
         }
 
 
+        update();
 
+        checkWin();
 
         invalidate();
     }
@@ -76,6 +73,12 @@ public class BoomshineView extends View
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        if (!mbPlaced)
+        {
+            addExpandingBall( event );
+            mbPlaced = true;
+        }
+
         return true;
     }
 
@@ -95,17 +98,14 @@ public class BoomshineView extends View
 
     private void nextRound()
     {
-        int width = mDisplay.getWidth();
-        int height = mDisplay.getHeight();
-        Random rand = new Random();
-        int image = R.drawable.ball_blue;
         mExpanding.clear();
         mMoving.clear();
 
+        mBoomshine.nextRound();
+
         for (int i = 0; i < mBoomshine.getNumBallsForWin() * 2; i++)
         {
-            mMoving.add(new BoundedBouncingBall( mContext, mDisplay, image, rand.nextInt(width),
-                    rand.nextInt(height), 0, height, 0, width ));
+            addMovingBall();
         }
     }
 
@@ -116,14 +116,20 @@ public class BoomshineView extends View
 
     private void update()
     {
+        boolean tempBool;
         for (int i  = 0; i < mExpanding.size(); i ++)
         {
-            mExpanding.get(i).expandBall();
+            tempBool = mExpanding.get(i).expandBall();
+            if (tempBool)
+            {
+                mExpanding.remove( i );
+            }
         }
 
         for (int i = 0; i < mMoving.size(); i++)
         {
             mMoving.get(i).move();
+            mMoving.get(i).Bounce();
         }
     }
 
@@ -141,6 +147,32 @@ public class BoomshineView extends View
 
     public void saveHighScore()
     {
+
+    }
+
+    private void addMovingBall()
+    {
+        int width = mDisplay.getWidth();
+        int height = mDisplay.getHeight();
+        Random rand = new Random();
+        int image = R.drawable.ball_blue;
+        mMoving.add(new BoundedBouncingBall( mContext, mDisplay, image,
+                rand.nextInt(width), rand.nextInt(height),
+                (rand.nextDouble() * 2 * mVelocityMultiplier) - mVelocityMultiplier,
+                (rand.nextDouble() * 2 * mVelocityMultiplier) - mVelocityMultiplier,
+                0, height, 0, width ));
+    }
+
+    private void addExpandingBall(MotionEvent event)
+    {
+        mExpanding.add(new ExpandingBall( mContext, mDisplay, R.drawable.ball_yellow,
+                (int) event.getX(), (int) event.getY(), 0, 0, 1, 0.1f, 100));
+    }
+
+    private void addExpandingBall(MovingSprite movesprite)
+    {
+        mExpanding.add(new ExpandingBall( mContext, mDisplay, movesprite.getResID(),
+                (int) movesprite.getX(), (int) movesprite.getY(), 0, 0, 1, 0.1f, 100));
 
     }
 }

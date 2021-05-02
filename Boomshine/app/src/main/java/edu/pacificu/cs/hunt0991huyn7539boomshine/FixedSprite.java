@@ -30,10 +30,10 @@ public class FixedSprite extends ImageView
     private int mHeight;
     private Context mContext;
     private static int mCount = 0;
-    protected int mRadius;
+    protected float mRadius;
     private Paint mPaint;
     private int mColor;
-    private int mOGRadius;
+    private float mOGRadius;
 
 
 
@@ -80,7 +80,7 @@ public class FixedSprite extends ImageView
     {
         canvas.drawBitmap(mBitmapImage, ((int) this.mXUpperLeft),
                 (int) this.mYUpperLeft, null);
-        mRadius = mBitmapImage.getWidth ();
+        mRadius = mBitmapImage.getWidth () / 2;
         mOGRadius = mRadius;
 
     }
@@ -173,9 +173,9 @@ public class FixedSprite extends ImageView
      * @return the radius of the sprite
      * @since 1.0
      */
-    public int getRadius()
+    public float getRadius()
     {
-        return getSpriteHeight() / 2;
+        return mRadius;
     }
 
     /**
@@ -199,4 +199,6 @@ public class FixedSprite extends ImageView
     {
         return mContext.getResources().getDisplayMetrics().widthPixels;
     }
+
+    public float getOGRadius() { return mOGRadius; }
 }

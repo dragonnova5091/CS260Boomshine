@@ -38,9 +38,11 @@ public class MovingSprite extends FixedSprite
      * @since 1.0
      */
     public MovingSprite (Context context, Display display, int drawable,
-                         int topCoord, int leftCoord)
+                         int topCoord, int leftCoord, double xVel, double yVel)
     {
         super (context, display, drawable, topCoord, leftCoord);
+        mXVel = xVel;
+        mYVel = yVel;
     }
 
     /**
@@ -65,7 +67,8 @@ public class MovingSprite extends FixedSprite
 
     public void move ()
     {
-        setXUpperLeft (this.getXUpperLeft() + 1);
+        mXUpperLeft += mXVel;
+        mYUpperLeft += mYVel;
     }
 
 }

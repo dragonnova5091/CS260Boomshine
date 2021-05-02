@@ -22,7 +22,7 @@ public class Boomshine
     private int mLives;
     private boolean mPlacedBall;
 
-    public void onCreate()
+    public  Boomshine()
     {
         Log.d("here", "constructor");
         mRound = 1;
