@@ -3,11 +3,14 @@ package edu.pacificu.cs.hunt0991huyn7539boomshine;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.Display;
+
+import static android.content.ContentValues.TAG;
 
 public class ExpandingBall extends MovingSprite
 {
-    private float mRate, mRadius, mMaxRadius;
+    private float mRate, mMaxRadius;
     private float mScale;
     private boolean bExpand = true;
     private MovingSprite mSprite;
@@ -18,7 +21,6 @@ public class ExpandingBall extends MovingSprite
     {
         super(context, display, drawable, topCoord, leftCoord, xVel, yVel);
         mRate = rate;
-        mRadius = radius;
         mMaxRadius = max;
     }
 
@@ -26,7 +28,8 @@ public class ExpandingBall extends MovingSprite
     {
        if (bExpand)
         {
-            mRadius += mRate;
+            mRadius = mRadius + mRate;
+            Log.d(TAG, "expandBall: " + mRadius);
             if (mRadius >= mMaxRadius)
             {
                 bExpand = false;
@@ -51,7 +54,7 @@ public class ExpandingBall extends MovingSprite
         return true;
     }
 
-    @Override
+   /* @Override
     public void doDraw( Canvas canvas )
     {
         Paint paint = new Paint();
@@ -63,5 +66,5 @@ public class ExpandingBall extends MovingSprite
         canvas.scale( mRadius/ getOGRadius(), mRadius/ getOGRadius(), 0, 0 );
         canvas.drawBitmap(mBitmapImage, (int) mXUpperLeft, (int) mYUpperLeft, paint);
         canvas.restore();
-    }
+    }*/
 }

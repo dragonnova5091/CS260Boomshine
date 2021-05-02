@@ -34,6 +34,7 @@ public class FixedSprite extends ImageView
     private Paint mPaint;
     private int mColor;
     private float mOGRadius;
+    private boolean mFirst;
 
 
 
@@ -64,6 +65,7 @@ public class FixedSprite extends ImageView
         mDisplay = display;
         mXUpperLeft = xUpperLeft;
         mYUpperLeft = yUpperLeft;
+        mFirst = true;
         Log.d("Constr Sprite height: ", Integer.toString((int) this.getSpriteHeight()));
         Log.d("Constr Sprite width: ", Integer.toString((int) this.getSpriteWidth()));
         mResID = drawable;
@@ -80,7 +82,10 @@ public class FixedSprite extends ImageView
     {
         canvas.drawBitmap(mBitmapImage, ((int) this.mXUpperLeft),
                 (int) this.mYUpperLeft, null);
-        mRadius = mBitmapImage.getWidth () / 2;
+            mRadius = mBitmapImage.getWidth ();
+            //mFirst = false;
+
+
         mOGRadius = mRadius;
 
     }

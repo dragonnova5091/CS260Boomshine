@@ -71,4 +71,9 @@ public class MovingSprite extends FixedSprite
         mYUpperLeft += mYVel;
     }
 
+    public void setRadius(int size)
+    {
+        mRadius += size;
+    }
+
 }

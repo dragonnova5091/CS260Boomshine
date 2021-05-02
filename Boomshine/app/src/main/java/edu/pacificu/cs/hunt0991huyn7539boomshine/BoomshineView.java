@@ -24,7 +24,7 @@ public class BoomshineView extends View
     private Context mContext;
     private Display mDisplay;
 
-    private boolean mbPlaced = false;
+    private boolean mbPlaced;
 
 
     public BoomshineView (Context context, Display display)
@@ -37,6 +37,7 @@ public class BoomshineView extends View
         mDisplay = display;
         mExpanding = new ArrayList<> ();
         mMoving = new ArrayList<> ();
+        mbPlaced = false;
 
 
         Log.d("debug", "" + mBoomshine.getNumBallsForWin());
@@ -51,16 +52,18 @@ public class BoomshineView extends View
     @Override
     public void onDraw(Canvas canvas)
     {
-        Log.d("draw", "in doDraw");
+        Log.d("draw", "in doDraw" + mExpanding.size());
         for (int i  = 0; i < mExpanding.size(); i ++)
         {
             mExpanding.get(i).doDraw(canvas);
+            mExpanding.get(i).expandBall();
         }
 
         for (int i = 0; i < mMoving.size(); i++)
         {
             mMoving.get(i).doDraw( canvas );
         }
+
 
 
         update();
@@ -73,6 +76,10 @@ public class BoomshineView extends View
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        if (event.getAction () != MotionEvent.ACTION_DOWN)
+        {
+            return super.onTouchEvent (event);
+        }
         if (!mbPlaced)
         {
             addExpandingBall( event );
@@ -166,13 +173,13 @@ public class BoomshineView extends View
     private void addExpandingBall(MotionEvent event)
     {
         mExpanding.add(new ExpandingBall( mContext, mDisplay, R.drawable.ball_yellow,
-                (int) event.getX(), (int) event.getY(), 0, 0, 1, 0.1f, 100));
+                (int) event.getX(), (int) event.getY(), 0, 0, 2, 10, 100));
     }
 
     private void addExpandingBall(MovingSprite movesprite)
     {
         mExpanding.add(new ExpandingBall( mContext, mDisplay, movesprite.getResID(),
-                (int) movesprite.getX(), (int) movesprite.getY(), 0, 0, 1, 0.1f, 100));
+                (int) movesprite.getX(), (int) movesprite.getY(), 0, 0, 2, 0.1f, 100));
 
     }
 }
