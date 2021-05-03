@@ -52,11 +52,14 @@ public class BoomshineView extends View
     @Override
     public void onDraw(Canvas canvas)
     {
+        update();
+
+
         Log.d("draw", "in doDraw" + mExpanding.size());
         for (int i  = 0; i < mExpanding.size(); i ++)
         {
             mExpanding.get(i).doDraw(canvas);
-            mExpanding.get(i).expandBall();
+            //mExpanding.get(i).expandBall();
         }
 
         for (int i = 0; i < mMoving.size(); i++)
@@ -66,7 +69,7 @@ public class BoomshineView extends View
 
 
 
-        update();
+
 
         checkWin();
 
@@ -126,11 +129,26 @@ public class BoomshineView extends View
         boolean tempBool;
         for (int i  = 0; i < mExpanding.size(); i ++)
         {
+
+            for (int j = 0; j < mMoving.size(); j++)
+            {
+                if (mExpanding.get(i).collide( mMoving.get(j) ))
+                {
+
+                    addExpandingBall( mMoving.get(j));
+
+                    mMoving.remove( j );
+
+                }
+            }
+
             tempBool = mExpanding.get(i).expandBall();
             if (tempBool)
             {
                 mExpanding.remove( i );
             }
+
+
         }
 
         for (int i = 0; i < mMoving.size(); i++)
@@ -173,13 +191,16 @@ public class BoomshineView extends View
     private void addExpandingBall(MotionEvent event)
     {
         mExpanding.add(new ExpandingBall( mContext, mDisplay, R.drawable.ball_yellow,
-                (int) event.getX(), (int) event.getY(), 0, 0, 2, 10, 100));
+                (int) event.getX(), (int) event.getY(), 0, 0, mBoomshine.getNumBallsForWin(), 10,
+                200));
     }
 
     private void addExpandingBall(MovingSprite movesprite)
     {
         mExpanding.add(new ExpandingBall( mContext, mDisplay, movesprite.getResID(),
-                (int) movesprite.getX(), (int) movesprite.getY(), 0, 0, 2, 0.1f, 100));
+                (int) (movesprite.getXUpperLeft() + movesprite.getRadius()),
+                (int) (movesprite.getYUpperLeft() + movesprite.getRadius()),
+                0,0, 2,10, movesprite.getRadius()*2));
 
     }
 }

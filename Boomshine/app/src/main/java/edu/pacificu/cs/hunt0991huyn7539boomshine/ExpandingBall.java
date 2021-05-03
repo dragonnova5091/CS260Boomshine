@@ -1,58 +1,99 @@
 package edu.pacificu.cs.hunt0991huyn7539boomshine;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.Log;
 import android.view.Display;
 
 import static android.content.ContentValues.TAG;
+import static java.lang.Math.sqrt;
 
 public class ExpandingBall extends MovingSprite
 {
-    private float mRate, mMaxRadius;
-    private float mScale;
-    private boolean bExpand = true;
-    private MovingSprite mSprite;
+  private float mRate, mMaxRadius;
+  private float mScale;
+  private boolean bExpand = true;
+  private MovingSprite mSprite;
 
-    public ExpandingBall(Context context, Display display, int drawable,
-                         int topCoord, int leftCoord, double xVel, double yVel,
-                         float rate, float radius, float max)
+  public ExpandingBall( Context context, Display display, int drawable,
+                        int topCoord, int leftCoord, double xVel, double yVel,
+                        float rate, float radius, float max )
+  {
+    super( context, display, drawable, topCoord, leftCoord, xVel, yVel );
+    mRate = rate;
+    mMaxRadius = max;
+    mRadius = radius;
+    Log.d("constructor radius", "" + mRadius);
+    setImageBitmap( Bitmap.createScaledBitmap( mBitmapImage, (int) mRadius,
+            (int) mRadius,false ) );
+    Log.d("constructor radius 2", "" + mRadius);
+
+  }
+
+  public boolean expandBall()
+  {
+    float tempRadius;
+    if ( bExpand )
     {
-        super(context, display, drawable, topCoord, leftCoord, xVel, yVel);
-        mRate = rate;
-        mMaxRadius = max;
+      mRadius = mRadius + mRate;
+
+      setXUpperLeft( getXUpperLeft() - mRate );
+      setYUpperLeft( getYUpperLeft() - mRate );
+
+      if ( mRadius >= mMaxRadius )
+      {
+        bExpand = false;
+      }
+    }
+    else
+    {
+      mRadius -= mRate;
+      setXUpperLeft( getXUpperLeft() + mRate );
+      setYUpperLeft( getYUpperLeft() + mRate );
     }
 
-    public boolean expandBall()
-    {
-       if (bExpand)
-        {
-            mRadius = mRadius + mRate;
-            Log.d(TAG, "expandBall: " + mRadius);
-            if (mRadius >= mMaxRadius)
-            {
-                bExpand = false;
-            }
-        }
-        {
-            mRadius -= mRate;
-        }
-        setXUpperLeft(getXUpperLeft());
-        setYUpperLeft(getYUpperLeft());
+    Log.d( TAG, "expandBall: " + mRadius );
 
-        return mRadius <= 0;
+    if(mRadius > 0)
+    {
+      Bitmap scaledBMap = Bitmap.createScaledBitmap( getOGBitmap(), ( int ) mRadius * 2,
+              ( int ) mRadius * 2,false );
+      tempRadius = mRadius;
+      setBitmap( scaledBMap );
+      mRadius = tempRadius;
     }
 
-    public float getRadius()
-    {
-        return mRadius;
-    }
+    //Log.d("radius", "" + mRadius + " " + mMaxRadius );
 
-    public boolean collide(BoundedBouncingBall mSprite)
-    {
-        return true;
-    }
+
+
+
+    return mRadius <= 0;
+  }
+
+  public float getRadius()
+  {
+    return mRadius;
+  }
+
+  public boolean collide( BoundedBouncingBall mSprite )
+  {
+    int xCenter = (int) mXUpperLeft + (int) mRadius;
+    int yCenter = (int) mYUpperLeft + (int) mRadius;
+
+    int spriteXCenter = (int) (mSprite.mXUpperLeft + mSprite.mRadius);
+    int spriteYCenter = (int) (mSprite.mYUpperLeft + mSprite.mRadius);
+    int spriteRadius = (int) mSprite.mRadius;
+
+    int centerDistance = ( int ) sqrt((spriteYCenter - yCenter) * (spriteYCenter - yCenter)
+            + (spriteXCenter - xCenter) * (spriteXCenter - xCenter));
+
+
+    return centerDistance < mRadius + spriteRadius;
+  }
 
    /* @Override
     public void doDraw( Canvas canvas )
