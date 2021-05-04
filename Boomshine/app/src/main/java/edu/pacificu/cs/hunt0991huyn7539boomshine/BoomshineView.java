@@ -212,7 +212,7 @@ public class BoomshineView extends View
         mExpanding.add(new ExpandingBall( mContext, mDisplay, movesprite.getResID(),
                 (int) (movesprite.getXUpperLeft()),
                 (int) (movesprite.getYUpperLeft()),
-                0,0, 2, movesprite.getRadius(), movesprite.getRadius()*2));
+                0,0, mBoomshine.getNumBallsForWin(), movesprite.getRadius(), movesprite.getRadius()*2));
 
     }
 }

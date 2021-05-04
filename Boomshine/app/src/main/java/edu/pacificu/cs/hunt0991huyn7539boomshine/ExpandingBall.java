@@ -26,7 +26,7 @@ public class ExpandingBall extends MovingSprite
     mRate = rate;
     mMaxRadius = max;
     mRadius = radius;
-    setImageBitmap( Bitmap.createScaledBitmap( mBitmapImage, (int) mRadius,
+    setBitmap( Bitmap.createScaledBitmap( mBitmapImage, (int) mRadius,
             (int) mRadius,true ) );
 
   }
@@ -59,7 +59,7 @@ public class ExpandingBall extends MovingSprite
               ( int ) mRadius * 2,true );
       tempRadius = mRadius;
       setBitmap( scaledBMap );
-      mRadius = tempRadius;
+      //mRadius = tempRadius;
     }
 
     return mRadius <= 0;
