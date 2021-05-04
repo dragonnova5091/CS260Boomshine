@@ -56,7 +56,6 @@ public class FixedSprite extends ImageView
     super( context );
 
     BitmapFactory.Options opts = new BitmapFactory.Options();
-//    opts.inScaled = false;
     opts.inJustDecodeBounds = true;
     mBitmapImage = BitmapFactory.decodeResource( context.getResources(),
             drawable );
@@ -67,8 +66,6 @@ public class FixedSprite extends ImageView
     mXUpperLeft = xUpperLeft;
     mYUpperLeft = yUpperLeft;
     mFirst = true;
-    Log.d( "Constr Sprite height: ", Integer.toString( ( int ) this.getSpriteHeight() ) );
-    Log.d( "Constr Sprite width: ", Integer.toString( ( int ) this.getSpriteWidth() ) );
     mResID = drawable;
     ++mCount;
   }
@@ -83,11 +80,6 @@ public class FixedSprite extends ImageView
   {
     canvas.drawBitmap( mBitmapImage, ( ( int ) this.mXUpperLeft ),
             ( int ) this.mYUpperLeft, null );
-
-    //mFirst = false;
-
-
-
 
   }
 

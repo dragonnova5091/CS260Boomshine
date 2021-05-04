@@ -80,19 +80,19 @@ public class MainActivity extends AppCompatActivity
 
   private void onBtnHTP( View view )
   {
-    Log.d("htp", "start HTP Activity");
+    //Log.d("htp", "start HTP Activity");
     startActivity(new Intent(this, HowToPlay.class));
   }
 
   private void onBtnQuit( View view )
   {
-    Log.d("quit", "trying to quit");
+    //Log.d("quit", "trying to quit");
     this.finish();
   }
 
   private void onBtnStart( View view )
   {
-    Log.d("start", "start Boomshine View");
+    //Log.d("start", "start Boomshine View");
     setContentView( mBoomshineView );
   }
 

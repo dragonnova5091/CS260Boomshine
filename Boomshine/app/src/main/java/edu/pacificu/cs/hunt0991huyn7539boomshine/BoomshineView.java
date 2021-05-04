@@ -40,8 +40,6 @@ public class BoomshineView extends View
         mMoving = new ArrayList<> ();
         mbPlaced = false;
 
-
-        Log.d("debug", "" + mBoomshine.getNumBallsForWin());
         for (int i = 0; i < mBoomshine.getNumBallsForWin() * 2; i++)
         {
             addMovingBall();
@@ -58,8 +56,6 @@ public class BoomshineView extends View
         float textSize;
         update();
 
-
-        Log.d("draw", "in doDraw" + mExpanding.size());
         for (int i  = 0; i < mExpanding.size(); i ++)
         {
             mExpanding.get(i).doDraw(canvas);
@@ -131,11 +127,6 @@ public class BoomshineView extends View
             addMovingBall();
             invalidate();
         }
-    }
-
-    public void onDrawUI(Canvas canvas)
-    {
-
     }
 
     private void update()

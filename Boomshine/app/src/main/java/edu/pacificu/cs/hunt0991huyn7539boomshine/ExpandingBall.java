@@ -26,10 +26,8 @@ public class ExpandingBall extends MovingSprite
     mRate = rate;
     mMaxRadius = max;
     mRadius = radius;
-    //Log.d("constructor radius", "" + mRadius);
     setImageBitmap( Bitmap.createScaledBitmap( mBitmapImage, (int) mRadius,
             (int) mRadius,true ) );
-    //Log.d("constructor radius 2", "" + mRadius);
 
   }
 
@@ -55,8 +53,6 @@ public class ExpandingBall extends MovingSprite
       setYUpperLeft( getYUpperLeft() + mRate );
     }
 
-    //Log.d( TAG, "expandBall: " + mRadius );
-
     if(mRadius > 0)
     {
       Bitmap scaledBMap = Bitmap.createScaledBitmap( getOGBitmap(), ( int ) mRadius * 2,
@@ -65,11 +61,6 @@ public class ExpandingBall extends MovingSprite
       setBitmap( scaledBMap );
       mRadius = tempRadius;
     }
-
-    //Log.d("radius", "" + mRadius + " " + mMaxRadius );
-
-
-
 
     return mRadius <= 0;
   }
@@ -95,17 +86,4 @@ public class ExpandingBall extends MovingSprite
     return centerDistance < mRadius + spriteRadius;
   }
 
-   /* @Override
-    public void doDraw( Canvas canvas )
-    {
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setFilterBitmap(true);
-        paint.setDither(true);
-
-        canvas.save();
-        canvas.scale( mRadius/ getOGRadius(), mRadius/ getOGRadius(), 0, 0 );
-        canvas.drawBitmap(mBitmapImage, (int) mXUpperLeft, (int) mYUpperLeft, paint);
-        canvas.restore();
-    }*/
 }
