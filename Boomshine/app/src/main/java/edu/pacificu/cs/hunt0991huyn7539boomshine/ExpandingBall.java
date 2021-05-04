@@ -26,10 +26,10 @@ public class ExpandingBall extends MovingSprite
     mRate = rate;
     mMaxRadius = max;
     mRadius = radius;
-    Log.d("constructor radius", "" + mRadius);
+    //Log.d("constructor radius", "" + mRadius);
     setImageBitmap( Bitmap.createScaledBitmap( mBitmapImage, (int) mRadius,
-            (int) mRadius,false ) );
-    Log.d("constructor radius 2", "" + mRadius);
+            (int) mRadius,true ) );
+    //Log.d("constructor radius 2", "" + mRadius);
 
   }
 
@@ -55,12 +55,12 @@ public class ExpandingBall extends MovingSprite
       setYUpperLeft( getYUpperLeft() + mRate );
     }
 
-    Log.d( TAG, "expandBall: " + mRadius );
+    //Log.d( TAG, "expandBall: " + mRadius );
 
     if(mRadius > 0)
     {
       Bitmap scaledBMap = Bitmap.createScaledBitmap( getOGBitmap(), ( int ) mRadius * 2,
-              ( int ) mRadius * 2,false );
+              ( int ) mRadius * 2,true );
       tempRadius = mRadius;
       setBitmap( scaledBMap );
       mRadius = tempRadius;
@@ -81,7 +81,7 @@ public class ExpandingBall extends MovingSprite
 
   public boolean collide( BoundedBouncingBall mSprite )
   {
-    boolean bcol = false;
+    //boolean bcol = false;
     int xCenter = (int) mXUpperLeft + (int) mRadius;
     int yCenter = (int) mYUpperLeft + (int) mRadius;
 

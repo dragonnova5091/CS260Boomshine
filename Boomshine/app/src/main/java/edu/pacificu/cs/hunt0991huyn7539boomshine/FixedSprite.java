@@ -102,7 +102,11 @@ public class FixedSprite extends ImageView
     return mBitmapImage;
   }
 
-  public void setBitmap(Bitmap bm) { mBitmapImage = bm; }
+  public void setBitmap(Bitmap bm)
+  {
+    //mBitmapImage.recycle();
+    mBitmapImage = bm;
+  }
 
   public Bitmap getOGBitmap() { return mOGBitmap; }
 
