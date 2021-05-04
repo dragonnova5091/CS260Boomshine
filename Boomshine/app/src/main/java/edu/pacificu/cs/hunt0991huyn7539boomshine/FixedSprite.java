@@ -61,7 +61,7 @@ public class FixedSprite extends ImageView
     mBitmapImage = BitmapFactory.decodeResource( context.getResources(),
             drawable );
     mOGBitmap = mBitmapImage;
-    mRadius = mBitmapImage.getWidth();
+    mRadius = mBitmapImage.getWidth() / 2;
     mContext = context;
     mDisplay = display;
     mXUpperLeft = xUpperLeft;

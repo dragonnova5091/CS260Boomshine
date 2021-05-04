@@ -20,7 +20,6 @@ public class Boomshine
     private int mRoundScore;
     private int mTotalLives;
     private int mLives;
-    private boolean mPlacedBall;
 
     public  Boomshine()
     {
@@ -31,7 +30,6 @@ public class Boomshine
         mRoundScore = 0;
         mTotalLives = 3;
         mLives = mTotalLives;
-        mPlacedBall = false;
     }
 
     public void onDrawUI(Canvas canvas)
@@ -41,7 +39,9 @@ public class Boomshine
 
     public void reset()
     {
-
+        mNumBallsForWin = mRound;
+        mBallsPopped = 0;
+        mRoundScore = 0;
     }
 
     public void quit()
@@ -59,7 +59,6 @@ public class Boomshine
         mBallsPopped++;
     }
 
-    public void placeBall() { mPlacedBall = true; }
 
     public int nextRound()
     {
@@ -68,7 +67,6 @@ public class Boomshine
         mNumBallsForWin = mRound;
         mBallsPopped = 0;
         mRoundScore = 0;
-        mPlacedBall = false;
 
         return tempScore;
     }

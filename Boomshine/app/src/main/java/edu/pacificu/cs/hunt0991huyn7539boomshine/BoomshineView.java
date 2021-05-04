@@ -101,6 +101,13 @@ public class BoomshineView extends View
                     mBoomshine.getBallsPopped() >= mBoomshine.getNumBallsForWin())
             {
                 nextRound();
+                mbPlaced = false;
+            }
+            else if (mExpanding.size() == 0 &&
+                    mBoomshine.getBallsPopped() < mBoomshine.getNumBallsForWin())
+            {
+                reset();
+                mbPlaced = false;
             }
         }
 
@@ -116,6 +123,7 @@ public class BoomshineView extends View
         for (int i = 0; i < mBoomshine.getNumBallsForWin() * 2; i++)
         {
             addMovingBall();
+            invalidate();
         }
     }
 
@@ -129,15 +137,15 @@ public class BoomshineView extends View
         boolean tempBool;
         for (int i  = 0; i < mExpanding.size(); i ++)
         {
-
             for (int j = 0; j < mMoving.size(); j++)
             {
-                if (mExpanding.get(i).collide( mMoving.get(j) ))
+                if (mExpanding.get (i).collide( mMoving.get(j) ))
                 {
 
                     addExpandingBall( mMoving.get(j));
 
                     mMoving.remove( j );
+                    mBoomshine.popOne();
 
                 }
             }
@@ -147,8 +155,6 @@ public class BoomshineView extends View
             {
                 mExpanding.remove( i );
             }
-
-
         }
 
         for (int i = 0; i < mMoving.size(); i++)
@@ -162,7 +168,16 @@ public class BoomshineView extends View
 
     public void reset()
     {
+        mExpanding.clear();
+        mMoving.clear();
 
+        mBoomshine.reset();
+
+        for (int i = 0; i < mBoomshine.getNumBallsForWin() * 2; i++)
+        {
+            addMovingBall();
+            invalidate();
+        }
     }
 
     public void quit()

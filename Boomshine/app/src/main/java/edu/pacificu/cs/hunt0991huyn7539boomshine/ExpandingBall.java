@@ -81,6 +81,7 @@ public class ExpandingBall extends MovingSprite
 
   public boolean collide( BoundedBouncingBall mSprite )
   {
+    boolean bcol = false;
     int xCenter = (int) mXUpperLeft + (int) mRadius;
     int yCenter = (int) mYUpperLeft + (int) mRadius;
 
@@ -88,9 +89,8 @@ public class ExpandingBall extends MovingSprite
     int spriteYCenter = (int) (mSprite.mYUpperLeft + mSprite.mRadius);
     int spriteRadius = (int) mSprite.mRadius;
 
-    int centerDistance = ( int ) sqrt((spriteYCenter - yCenter) * (spriteYCenter - yCenter)
-            + (spriteXCenter - xCenter) * (spriteXCenter - xCenter));
-
+    int centerDistance = ( int ) sqrt(((spriteXCenter - xCenter) * (spriteXCenter - xCenter))
+           + ((spriteYCenter - yCenter) * (spriteYCenter - yCenter)));
 
     return centerDistance < mRadius + spriteRadius;
   }
