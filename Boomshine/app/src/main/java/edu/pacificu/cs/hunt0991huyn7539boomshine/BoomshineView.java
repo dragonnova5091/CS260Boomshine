@@ -2,6 +2,7 @@ package edu.pacificu.cs.hunt0991huyn7539boomshine;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
 import android.view.Display;
@@ -52,6 +53,9 @@ public class BoomshineView extends View
     @Override
     public void onDraw(Canvas canvas)
     {
+
+        final int TEXT_SIZE = 24;
+        float textSize;
         update();
 
 
@@ -67,8 +71,10 @@ public class BoomshineView extends View
             mMoving.get(i).doDraw( canvas );
         }
 
-
-
+        textSize = TEXT_SIZE * getResources().getDisplayMetrics().density;
+        mPaint.setColor(Color.BLACK);
+        mPaint.setTextSize(textSize);
+        canvas.drawText("Total score: " + mBoomshine.getBallsPopped(), 10, textSize + 10, mPaint);
 
 
         checkWin();
@@ -213,9 +219,9 @@ public class BoomshineView extends View
     private void addExpandingBall(MovingSprite movesprite)
     {
         mExpanding.add(new ExpandingBall( mContext, mDisplay, movesprite.getResID(),
-                (int) (movesprite.getXUpperLeft() + movesprite.getRadius()),
-                (int) (movesprite.getYUpperLeft() + movesprite.getRadius()),
-                0,0, 2,10, movesprite.getRadius()*2));
+                (int) (movesprite.getXUpperLeft()),
+                (int) (movesprite.getYUpperLeft()),
+                0,0, 2, movesprite.getRadius(), movesprite.getRadius()*2));
 
     }
 }
