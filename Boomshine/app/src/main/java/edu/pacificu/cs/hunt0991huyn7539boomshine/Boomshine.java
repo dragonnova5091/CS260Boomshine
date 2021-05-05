@@ -17,7 +17,7 @@ public class Boomshine
     private int mRound;
     private int mNumBallsForWin;
     private int mBallsPopped;
-    private int mRoundScore;
+    private int mTotalScore;
     private int mTotalLives;
     private int mLives;
     private int mLastTotal;
@@ -28,7 +28,8 @@ public class Boomshine
         mRound = 1;
         mNumBallsForWin = mRound;
         mBallsPopped = 0;
-        mRoundScore = 0;
+
+        mTotalScore = 0;
         mTotalLives = 3;
         mLastTotal = 0;
         mLives = mTotalLives;
@@ -39,11 +40,12 @@ public class Boomshine
 
     }
 
-    public void reset()
+    public int reset()
     {
         mNumBallsForWin = mRound;
-        mRoundScore = 0;
-        mBallsPopped = mLastTotal;
+        mLives--;
+        mBallsPopped = 0;
+        return mLives;
     }
 
     public void quit()
@@ -58,20 +60,25 @@ public class Boomshine
 
     public void popOne()
     {
+
         mBallsPopped++;
     }
 
 
     public int nextRound()
     {
-        int tempScore = mRoundScore;
+        int tempScore = mBallsPopped;
         mRound++;
+        mTotalScore += mBallsPopped;
         mNumBallsForWin = mRound;
-        mRoundScore = 0;
-        mLastTotal = mBallsPopped;
+        mLives = mTotalLives;
+        mBallsPopped = 0;
+
         return tempScore;
     }
 
     public int getBallsPopped() { return mBallsPopped; }
     public int getNumBallsForWin() { return  mNumBallsForWin; }
+    public int getTotalScore() { return mTotalScore; }
+    public int getLives() { return mLives; }
 }

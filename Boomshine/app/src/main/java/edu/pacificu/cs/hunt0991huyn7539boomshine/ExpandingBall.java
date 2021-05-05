@@ -33,7 +33,7 @@ public class ExpandingBall extends MovingSprite
 
   public boolean expandBall()
   {
-    float tempRadius;
+    //float tempRadius;
     if ( bExpand )
     {
       mRadius = mRadius + mRate;
@@ -44,6 +44,7 @@ public class ExpandingBall extends MovingSprite
       if ( mRadius >= mMaxRadius )
       {
         bExpand = false;
+        mRadius = mMaxRadius;
       }
     }
     else
@@ -57,9 +58,16 @@ public class ExpandingBall extends MovingSprite
     {
       Bitmap scaledBMap = Bitmap.createScaledBitmap( getOGBitmap(), ( int ) mRadius * 2,
               ( int ) mRadius * 2,true );
-      tempRadius = mRadius;
+      //tempRadius = mRadius;
       setBitmap( scaledBMap );
       //mRadius = tempRadius;
+    }
+    else
+    {
+      Bitmap scaledBMap = Bitmap.createScaledBitmap( getOGBitmap(), 1,
+              1,true );
+
+      setBitmap( scaledBMap );
     }
 
     return mRadius <= 0;

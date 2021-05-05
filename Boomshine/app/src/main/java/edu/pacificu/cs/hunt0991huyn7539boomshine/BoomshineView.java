@@ -26,6 +26,7 @@ public class BoomshineView extends View
     private Display mDisplay;
 
     private boolean mbPlaced;
+    private boolean mbPlaying;
 
 
     public BoomshineView (Context context, Display display)
@@ -39,6 +40,7 @@ public class BoomshineView extends View
         mExpanding = new ArrayList<> ();
         mMoving = new ArrayList<> ();
         mbPlaced = false;
+        mbPlaying = true;
 
         for (int i = 0; i < mBoomshine.getNumBallsForWin() * 2; i++)
         {
@@ -56,6 +58,8 @@ public class BoomshineView extends View
         float textSize;
         update();
 
+
+
         for (int i  = 0; i < mExpanding.size(); i ++)
         {
             mExpanding.get(i).doDraw(canvas);
@@ -67,13 +71,39 @@ public class BoomshineView extends View
             mMoving.get(i).doDraw( canvas );
         }
 
-        textSize = TEXT_SIZE * getResources().getDisplayMetrics().density;
-        mPaint.setColor(Color.BLACK);
-        mPaint.setTextSize(textSize);
-        canvas.drawText("Total score: " + mBoomshine.getBallsPopped(), 10, textSize + 10, mPaint);
+        if (mbPlaying)
+        {
+            textSize = TEXT_SIZE * getResources().getDisplayMetrics().density;
+            mPaint.setColor( Color.BLACK );
+            mPaint.setTextSize( textSize );
+            canvas.drawText( "Total score: " + (mBoomshine.getTotalScore() +
+                    mBoomshine.getBallsPopped()), 10, textSize + 10, mPaint );
+            canvas.drawText( "Balls Needed: " + mBoomshine.getNumBallsForWin(), 10,
+                    ( textSize + 10 ) * 2, mPaint );
+            canvas.drawText( "Current Round Score: " + mBoomshine.getBallsPopped(),
+                    10, ( textSize + 10 ) * 3, mPaint );
+            canvas.drawText( "Lives: " + mBoomshine.getLives(),10,
+                    ( textSize + 10 ) * 4, mPaint );
 
+        }
+        else
+        {
+            float tempint;
+            textSize = TEXT_SIZE * 2 * getResources().getDisplayMetrics().density;
+            tempint = textSize;
+            mPaint.setColor( Color.BLACK );
+            mPaint.setTextSize( textSize );
+            canvas.drawText( "You Lose.", getWidth() /4, (getHeight() /2) -
+                    (textSize/2), mPaint );
+            textSize = TEXT_SIZE * getResources().getDisplayMetrics().density;
+            mPaint.setTextSize( textSize );
+            canvas.drawText( "Total score: " + (mBoomshine.getTotalScore() +
+                    mBoomshine.getBallsPopped()), getWidth()/4, (getHeight() /2) -
+                    (int) (tempint * 1.5), mPaint );
+        }
 
         checkWin();
+
 
         invalidate();
     }
@@ -85,7 +115,7 @@ public class BoomshineView extends View
         {
             return super.onTouchEvent (event);
         }
-        if (!mbPlaced)
+        if (!mbPlaced && mbPlaying)
         {
             addExpandingBall( event );
             mbPlaced = true;
@@ -108,7 +138,10 @@ public class BoomshineView extends View
             else if (mExpanding.size() == 0 &&
                     mBoomshine.getBallsPopped() < mBoomshine.getNumBallsForWin())
             {
-                reset();
+                if (reset() <= 0)
+                {
+                    mbPlaying = false;
+                }
                 mbPlaced = false;
             }
         }
@@ -163,18 +196,20 @@ public class BoomshineView extends View
 
 
 
-    public void reset()
+    public int reset()
     {
         mExpanding.clear();
         mMoving.clear();
 
-        mBoomshine.reset();
+        int tempint = mBoomshine.reset();
 
         for (int i = 0; i < mBoomshine.getNumBallsForWin() * 2; i++)
         {
             addMovingBall();
             invalidate();
         }
+
+        return tempint;
     }
 
     public void quit()
@@ -192,7 +227,7 @@ public class BoomshineView extends View
         int width = mDisplay.getWidth();
         int height = mDisplay.getHeight();
         Random rand = new Random();
-        int image = R.drawable.ball_blue;
+        int image = getRandImage();
         mMoving.add(new BoundedBouncingBall( mContext, mDisplay, image,
                 rand.nextInt(width), rand.nextInt(height),
                 (rand.nextDouble() * 2 * mVelocityMultiplier) - mVelocityMultiplier,
@@ -212,7 +247,19 @@ public class BoomshineView extends View
         mExpanding.add(new ExpandingBall( mContext, mDisplay, movesprite.getResID(),
                 (int) (movesprite.getXUpperLeft()),
                 (int) (movesprite.getYUpperLeft()),
-                0,0, mBoomshine.getNumBallsForWin(), movesprite.getRadius(), movesprite.getRadius()*2));
+                0,0, mBoomshine.getNumBallsForWin(), movesprite.getRadius(), (movesprite.getRadius()*2)-mBoomshine.getNumBallsForWin()));
 
+    }
+
+    private int getRandImage()
+    {
+        int images[] ={R.drawable.ball_blue, R.drawable.ball_green, R.drawable.ball_yellow};
+
+        Random r = new Random();
+
+        int num = r.nextInt(images.length);
+
+
+        return images[num];
     }
 }
