@@ -1,6 +1,7 @@
 package edu.pacificu.cs.hunt0991huyn7539boomshine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.Display;
@@ -11,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class Boomshine
+public class Boomshine extends AppCompatActivity
 {
 
     private int mRound;
@@ -21,6 +22,7 @@ public class Boomshine
     private int mTotalLives;
     private int mLives;
     private int mLastTotal;
+    //private GameOverLayoutActivity mGameOver;
 
     public  Boomshine()
     {
@@ -75,6 +77,16 @@ public class Boomshine
         mBallsPopped = 0;
 
         return tempScore;
+    }
+
+    public void onGameOver(int score)
+    {
+        final String sPlayerScore = "player_score";
+        Intent gameOverIntent = new Intent (context,
+                GameOverOverlayActivity.class);
+        gameOverIntent.putExtra (sPlayerScore, score);
+
+        startActivity (gameOverIntent);
     }
 
     public int getBallsPopped() { return mBallsPopped; }

@@ -1,6 +1,7 @@
 package edu.pacificu.cs.hunt0991huyn7539boomshine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,6 +10,8 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -88,18 +91,19 @@ public class BoomshineView extends View
         }
         else
         {
-            float tempint;
-            textSize = TEXT_SIZE * 2 * getResources().getDisplayMetrics().density;
-            tempint = textSize;
-            mPaint.setColor( Color.BLACK );
-            mPaint.setTextSize( textSize );
-            canvas.drawText( "You Lose.", getWidth() /4, (getHeight() /2) -
-                    (textSize/2), mPaint );
-            textSize = TEXT_SIZE * getResources().getDisplayMetrics().density;
-            mPaint.setTextSize( textSize );
-            canvas.drawText( "Total score: " + (mBoomshine.getTotalScore() +
-                    mBoomshine.getBallsPopped()), getWidth()/4, (getHeight() /2) -
-                    (int) (tempint * 1.5), mPaint );
+//            float tempint;
+//            textSize = TEXT_SIZE * 2 * getResources().getDisplayMetrics().density;
+//            tempint = textSize;
+//            mPaint.setColor( Color.BLACK );
+//            mPaint.setTextSize( textSize );
+//            canvas.drawText( "You Lose.", getWidth() /4, (getHeight() /2) -
+//                    (textSize/2), mPaint );
+//            textSize = TEXT_SIZE * getResources().getDisplayMetrics().density;
+//            mPaint.setTextSize( textSize );
+//            canvas.drawText( "Total score: " + (mBoomshine.getTotalScore() +
+//                    mBoomshine.getBallsPopped()), getWidth()/4, (getHeight() /2) -
+//                    (int) (tempint * 1.5), mPaint );
+            mBoomshine.onGameOver((mBoomshine.getTotalScore() + mBoomshine.getBallsPopped()));
         }
 
         checkWin();
