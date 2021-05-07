@@ -3,4 +3,6 @@
     <string name="str_about">Authors: Ethan Hunter, and Hung Huynh</string>
     <string name="back">Back</string>
     <string name="hottoplay_str">this is the how to play directions</string>
+    <string name="mainmenu">MainMenu</string>
+    <string name="reset">Reset</string>
 </resources>

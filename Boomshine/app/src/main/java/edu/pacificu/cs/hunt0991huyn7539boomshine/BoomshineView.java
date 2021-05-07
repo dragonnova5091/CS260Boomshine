@@ -91,19 +91,19 @@ public class BoomshineView extends View
         }
         else
         {
-//            float tempint;
-//            textSize = TEXT_SIZE * 2 * getResources().getDisplayMetrics().density;
-//            tempint = textSize;
-//            mPaint.setColor( Color.BLACK );
-//            mPaint.setTextSize( textSize );
-//            canvas.drawText( "You Lose.", getWidth() /4, (getHeight() /2) -
-//                    (textSize/2), mPaint );
-//            textSize = TEXT_SIZE * getResources().getDisplayMetrics().density;
-//            mPaint.setTextSize( textSize );
-//            canvas.drawText( "Total score: " + (mBoomshine.getTotalScore() +
-//                    mBoomshine.getBallsPopped()), getWidth()/4, (getHeight() /2) -
-//                    (int) (tempint * 1.5), mPaint );
-            mBoomshine.onGameOver((mBoomshine.getTotalScore() + mBoomshine.getBallsPopped()));
+            float tempint;
+            textSize = TEXT_SIZE * 2 * getResources().getDisplayMetrics().density;
+            tempint = textSize;
+            mPaint.setColor( Color.BLACK );
+            mPaint.setTextSize( textSize );
+            canvas.drawText( "You Lose.", getWidth() /4, (getHeight() /2) -
+                    (textSize/2), mPaint );
+            textSize = TEXT_SIZE * getResources().getDisplayMetrics().density;
+            mPaint.setTextSize( textSize );
+            canvas.drawText( "Total score: " + (mBoomshine.getTotalScore() +
+                    mBoomshine.getBallsPopped()), getWidth()/4, (getHeight() /2) -
+                    (int) (tempint * 1.5), mPaint );
+
         }
 
         checkWin();
@@ -123,6 +123,12 @@ public class BoomshineView extends View
         {
             addExpandingBall( event );
             mbPlaced = true;
+        }
+        if (!mbPlaying)
+        {
+            mBoomshine = new Boomshine();
+            reset();
+            mbPlaying = true;
         }
 
         return true;
@@ -214,6 +220,21 @@ public class BoomshineView extends View
         }
 
         return tempint;
+    }
+
+    public void startNewGame()
+    {
+        mBoomshine = new Boomshine();
+        mExpanding.clear();
+        mMoving.clear();
+        mbPlaying = true;
+        mbPlaced = false;
+
+        for (int i = 0; i < mBoomshine.getNumBallsForWin() * 2; i++)
+        {
+            addMovingBall();
+            invalidate();
+        }
     }
 
     public void quit()

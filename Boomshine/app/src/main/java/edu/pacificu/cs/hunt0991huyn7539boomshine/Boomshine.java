@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class Boomshine extends AppCompatActivity
+public class Boomshine
 {
 
     private int mRound;
@@ -50,6 +50,8 @@ public class Boomshine extends AppCompatActivity
         return mLives;
     }
 
+
+
     public void quit()
     {
 
@@ -77,16 +79,6 @@ public class Boomshine extends AppCompatActivity
         mBallsPopped = 0;
 
         return tempScore;
-    }
-
-    public void onGameOver(int score)
-    {
-        final String sPlayerScore = "player_score";
-        Intent gameOverIntent = new Intent (context,
-                GameOverOverlayActivity.class);
-        gameOverIntent.putExtra (sPlayerScore, score);
-
-        startActivity (gameOverIntent);
     }
 
     public int getBallsPopped() { return mBallsPopped; }

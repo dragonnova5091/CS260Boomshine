@@ -9,6 +9,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -94,6 +97,31 @@ public class MainActivity extends AppCompatActivity
   {
     //Log.d("start", "start Boomshine View");
     setContentView( mBoomshineView );
+    mBoomshineView.startNewGame();
   }
 
+  @Override
+  public boolean onCreateOptionsMenu( Menu menu )
+  {
+
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate( R.menu.hamburger_menu, menu );
+
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(final MenuItem item)
+  {
+    if (item.getItemId() == R.id.mainmenu)
+    {
+      onCreateMenuButtons();
+    }
+    else if (item.getItemId() == R.id.resetGame)
+    {
+      mBoomshineView.startNewGame();
+    }
+
+    return true;
+  }
 }
