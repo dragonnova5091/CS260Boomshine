@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity
   {
     super.onCreate ( savedInstanceState );
 
-    mBoomshineView = new BoomshineView ( this.getApplicationContext (), this.getDisplay () );
+    mBoomshineView = new BoomshineView ( this.getApplicationContext (),
+                                        this.getDisplay () );
 
     mDisplay = this.getDisplay ();
 
@@ -58,7 +59,8 @@ public class MainActivity extends AppCompatActivity
   }
 
   /**
-   * Overrides the MainActivity.onCreateMenuButtons method. inflates the menu buttons
+   * Overrides the MainActivity.onCreateMenuButtons method.
+   * inflates the menu buttons
    */
   private void onCreateMenuButtons ()
   {
@@ -148,7 +150,8 @@ public class MainActivity extends AppCompatActivity
   }
 
   /**
-   * Overrides the MainActivity.onCreateOptionsMenu method. Creates the drop down menu.
+   * Overrides the MainActivity.onCreateOptionsMenu method.
+   * Creates the drop down menu.
    *
    * @param menu the menu layout
    */
@@ -163,7 +166,8 @@ public class MainActivity extends AppCompatActivity
   }
 
   /**
-   * Overrides the MainActivity.onOptionsItemSelected method. Start the intents of the dropdown
+   * Overrides the MainActivity.onOptionsItemSelected method.
+   * Start the intents of the dropdown
    * menu
    *
    * @param item the item from menu to start

@@ -33,8 +33,9 @@ public class BoundedBouncingBall extends MovingSprite
    * @param rightBound The right bound for the created circle
    */
   public BoundedBouncingBall ( Context context, Display display, int drawable,
-                               int topCoord, int leftCoord, double xVel, double yVel, int topBound,
-                               int botBound, int leftBound, int rightBound )
+                               int topCoord, int leftCoord, double xVel, double yVel,
+                               int topBound, int botBound, int leftBound,
+                               int rightBound )
   {
     super ( context, display, drawable, topCoord, leftCoord, xVel, yVel );
     mTopBound = topBound;

@@ -8,7 +8,8 @@ import android.view.Display;
 import android.view.MotionEvent;
 
 /**
- * Defines the TimedBoomshineView class that contains the Boomshine game logic and view layout.
+ * Defines the TimedBoomshineView class that contains the Boomshine
+ * game logic and view layout.
  *
  * @author Hung Huynh And Ethan Hunter
  * @version 1.0

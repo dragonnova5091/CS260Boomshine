@@ -7,7 +7,7 @@ import android.view.Display;
  * Defines the MovingSprite class which maintains the specifics of a sprite
  * including its location, size, and bitmap.
  *
- * @author Hung Huynh
+ * @author Hung Huynh and Computer Science
  * @version 1.0
  */
 public class MovingSprite extends FixedSprite
@@ -53,15 +53,15 @@ public class MovingSprite extends FixedSprite
     mYUpperLeft = yUpperLeft;
   }
 
+  /**
+   * Moves the sprite using x and y velocities.
+   *
+   * @since 1.0
+   */
   public void move ()
   {
     mXUpperLeft += mXVel;
     mYUpperLeft += mYVel;
-  }
-
-  public void setRadius ( int size )
-  {
-    mRadius += size;
   }
 
 }

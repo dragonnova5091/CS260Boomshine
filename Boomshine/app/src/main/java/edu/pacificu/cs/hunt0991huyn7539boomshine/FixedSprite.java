@@ -72,11 +72,22 @@ public class FixedSprite extends ImageView
 
   }
 
+  /**
+   * Sets the bitmap.
+   *
+   * @param bm the bitmap to copy
+   * @since 1.0
+   */
   public void setBitmap ( Bitmap bm )
   {
     mBitmapImage = bm;
   }
 
+  /**
+   * Gets the original bitmap.
+   *
+   * @since 1.0
+   */
   public Bitmap getOGBitmap ()
   {
     return mOGBitmap;
@@ -161,11 +172,4 @@ public class FixedSprite extends ImageView
   {
     return mRadius;
   }
-
-  /**
-   * Retrieves the height of the display.
-   *
-   * @return the height of the display
-   * @since 1.0
-   */
 }

@@ -114,8 +114,9 @@ public class ExpandingBall extends MovingSprite
     int spriteYCenter = ( int ) ( mSprite.mYUpperLeft + mSprite.mRadius );
     int spriteRadius = ( int ) mSprite.mRadius;
 
-    int centerDistance = ( int ) sqrt ( ( ( spriteXCenter - xCenter ) * ( spriteXCenter - xCenter ) )
-            + ( ( spriteYCenter - yCenter ) * ( spriteYCenter - yCenter ) ) );
+    int centerDistance = ( int ) sqrt ( ( ( spriteXCenter - xCenter ) *
+            ( spriteXCenter - xCenter ) ) + ( ( spriteYCenter - yCenter )
+            * ( spriteYCenter - yCenter ) ) );
 
     return centerDistance < mRadius + spriteRadius;
   }
