@@ -1,43 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>8</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>96</x>
-      <y>392</y>
-      <w>320</w>
-      <h>384</h>
+      <x>0</x>
+      <y>372</y>
+      <w>240</w>
+      <h>168</h>
     </coordinates>
     <panel_attributes>BoomshineGame
 -
-#maBalls : Arraylist&lt;BoundedBouncingBall&gt;
--maExpandingBalls : Arraylist&lt;ExpandingBall&gt;
--mWidth : double
--mHeight : double
 -mRound : int
 -mNumBallsForWin : int
 -mBallsPopped : int
--mRound : int
--mPlacedBall : bool
 -mRoundScore : int
 -mTotalScore : int
 -mLives : int
 -
 +BoomshineGameLogic(Context, Display, double, double)
-+setGameSize(double, double) : void
-+update() : void
-+checkWin () : bool
-+checkLives() : bool
-+handleCollision(int, int) : void
-
-+placeBall(int, int, int, Sprite, int) : void
-+newRound() : void  
-+returnAllBalls() : ArrayList&lt;MovingSprite&gt;
-+getScore() : int
++reset() : void
++popOne() : void
++nextRound() : void
 +getTotalScore() : int 
 +getBallsPopped() : int
-+getRound() : int
++getLives() : int
 +getNumBallsForWin() : int
 
 
@@ -48,21 +35,20 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>104</x>
-      <y>144</y>
-      <w>288</w>
-      <h>168</h>
+      <x>6</x>
+      <y>186</y>
+      <w>216</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>ExpandingBall
 -
--mExpandingSpeed : int
--mScale : float
--mRadius : float 
+-bExpand : boolean
+-mRate : float
 -mMaxRadius : float
 -
 +ExpandingBall(Context, Display, int,
           int, int, int, int, int, int, int, float, float)
-+doDraw(Canvas) : void
++collide(BoundedBouncingBall) : boolean
 +expandBall () : void
 +getRadius() : float</panel_attributes>
     <additional_attributes/>
@@ -70,10 +56,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>384</x>
-      <y>232</y>
-      <w>480</w>
-      <h>32</h>
+      <x>216</x>
+      <y>252</y>
+      <w>360</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>580.0;20.0;10.0;10.0</additional_attributes>
@@ -81,10 +67,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>488</x>
-      <y>56</y>
-      <w>248</w>
-      <h>128</h>
+      <x>294</x>
+      <y>114</y>
+      <w>186</w>
+      <h>102</h>
     </coordinates>
     <panel_attributes>BoundedBouncingBall
 -
@@ -101,10 +87,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>728</x>
-      <y>120</y>
-      <w>136</w>
-      <h>128</h>
+      <x>474</x>
+      <y>168</y>
+      <w>102</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>150.0;140.0;10.0;10.0</additional_attributes>
@@ -112,10 +98,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>848</x>
-      <y>160</y>
-      <w>240</w>
-      <h>160</h>
+      <x>564</x>
+      <y>198</y>
+      <w>180</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>MovingSprite
 --
@@ -125,26 +111,28 @@
 -mDirection : double
 --
 +MovingSprite(Context, Display, int, int, int, int)
-+setXUpper(double) : void
++setYUpperLeft(double) : void
 +setXUpperLeft(double) : void
 +move() : void
-+randomDirection() : void</panel_attributes>
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>856</x>
-      <y>384</y>
-      <w>232</w>
-      <h>304</h>
+      <x>570</x>
+      <y>354</y>
+      <w>174</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>FixedSprite
 --
 #mBitmapImage : Bitmap
+#mOGBitmap : Bitmap
 #mDisplay : Display
 #mXUpperLeft : double
 #mYUpperLeft : double
+#mRadius : float
 -mResID : int
 -mWidth : int
 -mHeight : int
@@ -153,16 +141,15 @@
 --
 +FixedSprite(Context, Display, int, int, int)
 +doDraw(Canvas) : void
-+getBitmap() : Bitmap
++setBitmap(Bitmap) : void
++getOGBitmap() : Bitmap
 +getResID() : int
 +getYUpperLeft() : double
 +getXUpperLeft() : double
 +getCount() : int
 +getSpriteWidth() : int
 +getSpriteHeight() : int
-+int getRadius() : int
-+getDisplayHeight() : int
-+getDisplayWidth() : int
++getRadius() : int
 
 
 </panel_attributes>
@@ -171,98 +158,186 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>952</x>
+      <x>642</x>
       <y>312</y>
-      <w>24</w>
-      <h>88</h>
+      <w>18</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>128</x>
-      <y>304</y>
-      <w>32</w>
-      <h>104</h>
+      <x>216</x>
+      <y>276</y>
+      <w>132</w>
+      <h>36</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;110.0;20.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>200.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>512</x>
-      <y>376</y>
-      <w>248</w>
-      <h>184</h>
+      <x>294</x>
+      <y>300</y>
+      <w>186</w>
+      <h>294</h>
     </coordinates>
     <panel_attributes>BoomshineView
 -
 -mBoomshine : BoomshineGame
--mTimer : Time
+-mVelocityMultiplier : double
+-mScreenWidth : int
+-mScreenHeight : int
+#mExpanding : ArrayList&lt;ExpandingBall&gt;
+#mMoving : ArrayList&lt;BoundedBouncingBall&gt;
+#mPaint : Paint
+-mContext : Context
+-mDisplay : Display
+-mbPlaced : boolean
+#mbPlaying : boolean
+-mMediaPlayer : MediaPlayer
+-mBackgroundSound : MediaPlayer
 -
++BoomshineView(Context, Display)
++stopMusic() : void
 +onDraw(Canvas) : void
-+checkWin() : bool
-+onDrawUI(Canvas) : void
 +onTouchEvent(View) : void
-+reset() : void
-+quit() : void
-+saveHighScores() : bool</panel_attributes>
++checkWin(Canvas) : bool
+-nextRound(Canvas) : void
+-update() : void
++reset() : int
++startNewGame() : void
+-addMovingBall(Canvas)
+-addExpandingBall(MotionEvent)
+-addExpandingBall(MovingSprite)
+-getRandImage() : int
++saveHighScore() : void
++getHighScore() : int
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>664</y>
-      <w>248</w>
+      <x>516</x>
+      <y>636</y>
+      <w>186</w>
       <h>168</h>
     </coordinates>
     <panel_attributes>MainActivity
 -
-mbtnStart : Button
-mbtnQuit : Button
-mbtnAbout : Button
-mMenu : Menu
+-mbtnStart : Button
+-mbtnQuit : Button
+-mbtnAbout : Button
+-mbtnTimedStart : Button
+-mDisplay : Display
+-mBoomshineView : BoomshineView
 -
-+onMenuInflate() : void
-+onCreate(Bundle) : void
++onCreateOptionsMenu() : boolean
++onOptionsItemSelected() : boolean
+#onCreate(Bundle) : void
+#onPause() : void
+-onBtnHTP(View) : void
+-onBtnStart(View) : void
+-onBtnQuit(View) : void
+-onBtnTimeStart(View) : void
+
+
+
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>408</x>
-      <y>448</y>
-      <w>120</w>
-      <h>80</h>
+      <x>234</x>
+      <y>456</y>
+      <w>72</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;80.0;130.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>632</x>
-      <y>552</y>
-      <w>24</w>
-      <h>128</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;100.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>384</x>
-      <y>144</y>
-      <w>120</w>
-      <h>264</h>
+      <y>588</y>
+      <w>234</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;310.0;130.0;10.0</additional_attributes>
+    <additional_attributes>370.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>324</x>
+      <y>210</y>
+      <w>48</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;150.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>684</y>
+      <w>186</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>TimedBoomshineView
+-
+-mTimer : CountDownTimer
+-mTimeleft : String
+-
++TimedBoomshineView(Context, Display)
++onDraw(Canvas) : void
++onTouchEvent(MotionEvent) : boolean
++stopTimer() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>372</x>
+      <y>588</y>
+      <w>36</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>768</x>
+      <y>630</y>
+      <w>126</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>HowToPlay
+-
+-mBtnBack : Button
+-
+#onCreate(Bundle) : void
+#onBtnBack(View) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>648</y>
+      <w>84</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
   </element>
 </diagram>
