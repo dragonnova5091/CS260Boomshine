@@ -17,7 +17,8 @@ import static java.lang.Math.sqrt;
  */
 public class ExpandingBall extends MovingSprite
 {
-  private float mRate, mMaxRadius;
+  private final float mRate;
+  private final float mMaxRadius;
   private boolean bExpand = true;
 
   /**

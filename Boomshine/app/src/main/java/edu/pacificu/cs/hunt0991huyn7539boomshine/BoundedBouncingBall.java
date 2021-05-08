@@ -14,7 +14,10 @@ import android.view.Display;
  */
 public class BoundedBouncingBall extends MovingSprite
 {
-  private int mTopBound, mBottomBound, mLeftBound, mRightBound;
+  private final int mTopBound;
+  private final int mBottomBound;
+  private final int mLeftBound;
+  private final int mRightBound;
 
   /**
    * Initializes bounding member variables with passed-in values

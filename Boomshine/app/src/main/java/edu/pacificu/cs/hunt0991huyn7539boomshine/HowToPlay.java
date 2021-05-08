@@ -8,7 +8,6 @@ import android.widget.Button;
 
 public class HowToPlay extends Activity
 {
-  private Button mBtnBack;
 
   /**
    * onCreate :: called when the Activity is created
@@ -21,15 +20,8 @@ public class HowToPlay extends Activity
     super.onCreate ( savedInstanceState );
     setContentView ( R.layout.howtoplay_layout );
 
-    mBtnBack = ( Button ) findViewById ( R.id.btnBack );
-    mBtnBack.setOnClickListener ( new View.OnClickListener ()
-    {
-      @Override
-      public void onClick ( View view )
-      {
-        onBtnBack ( view );
-      }
-    } );
+    Button mBtnBack = (Button) findViewById(R.id.btnBack);
+    mBtnBack.setOnClickListener (this::onBtnBack);
   }
 
   /**

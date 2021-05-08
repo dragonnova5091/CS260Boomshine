@@ -22,14 +22,12 @@ import java.util.Random;
  */
 public class BoomshineView extends View
 {
-  private double mVelocityMultiplier = 10;
-  private int mScreenWidth, mScreenHeight;
   private Boomshine mBoomshine;
-  ArrayList<ExpandingBall> mExpanding;
-  ArrayList<BoundedBouncingBall> mMoving;
-  protected Paint mPaint;
-  private Context mContext;
-  private Display mDisplay;
+  final ArrayList<ExpandingBall> mExpanding;
+  final ArrayList<BoundedBouncingBall> mMoving;
+  protected final Paint mPaint;
+  private final Context mContext;
+  private final Display mDisplay;
   protected int mHighscore;
   private boolean mbPlaced;
   protected boolean mbPlaying;
@@ -132,15 +130,15 @@ public class BoomshineView extends View
       tempint = textSize;
       mPaint.setColor ( Color.BLACK );
       mPaint.setTextSize ( textSize );
-      canvas.drawText ( "You Lose.", getWidth () / 4, ( getHeight () / 2 ) -
+      canvas.drawText ( "You Lose.", getWidth () / 4.0f, ( getHeight () / 2.0f ) -
               ( textSize / 2 ), mPaint );
       textSize = TEXT_SIZE * getResources ().getDisplayMetrics ().density;
       mPaint.setTextSize ( textSize );
       canvas.drawText ( "Total score: " + ( mBoomshine.getTotalScore () +
-                      mBoomshine.getBallsPopped () ), getWidth () / 4,
-              ( getHeight () / 2 ) - ( int ) ( tempint * 1.5 ), mPaint );
+                      mBoomshine.getBallsPopped () ), getWidth () / 4.0f,
+              ( getHeight () / 2.0f ) - ( int ) ( tempint * 1.5 ), mPaint );
       canvas.drawText ( "High score: " + ( getHighScore () ),
-              getWidth () / 4, ( getHeight () / 2 )
+              getWidth () / 4.0f, ( getHeight () / 2.0f )
                       - ( int ) ( tempint * 2 ), mPaint );
     }
     checkWin ( canvas );
@@ -279,9 +277,7 @@ public class BoomshineView extends View
     mExpanding.clear ();
     mMoving.clear ();
 
-    int tempint = mBoomshine.reset ();
-
-    return tempint;
+    return mBoomshine.reset ();
   }
 
   /**
@@ -305,18 +301,19 @@ public class BoomshineView extends View
    */
   private void addMovingBall ( Canvas canvas )
   {
-    mScreenHeight = canvas.getHeight ();
-    mScreenWidth = canvas.getWidth ();
+    int mScreenHeight = canvas.getHeight();
+    int mScreenWidth = canvas.getWidth();
     Random rand = new Random ();
     int image = getRandImage ();
+    double mVelocityMultiplier = 10;
     mMoving.add ( new BoundedBouncingBall ( mContext, mDisplay, image,
-            rand.nextInt ( mScreenWidth ),
-            rand.nextInt ( mScreenHeight ),
-            ( rand.nextDouble () * 2 * mVelocityMultiplier )
+            rand.nextInt (mScreenWidth),
+            rand.nextInt (mScreenHeight),
+            ( rand.nextDouble () * 2 * mVelocityMultiplier)
                     - mVelocityMultiplier,
-            ( rand.nextDouble () * 2 * mVelocityMultiplier )
+            ( rand.nextDouble () * 2 * mVelocityMultiplier)
                     - mVelocityMultiplier,
-            0, mScreenHeight, 0, mScreenWidth ) );
+            0, mScreenHeight, 0, mScreenWidth) );
   }
 
   /**
@@ -354,7 +351,7 @@ public class BoomshineView extends View
    */
   private int getRandImage ()
   {
-    int images[] = {
+    int[] images = {
             R.drawable.ball_blue,
             R.drawable.ball_green,
             R.drawable.ball_yellow

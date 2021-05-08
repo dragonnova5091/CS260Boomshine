@@ -15,7 +15,7 @@ public class Boomshine
   private int mNumBallsForWin;
   private int mBallsPopped;
   protected int mTotalScore;
-  private int mTotalLives;
+  private final int mTotalLives;
   private int mLives;
 
   /**
@@ -52,7 +52,7 @@ public class Boomshine
   /**
    * Moves the user on to the next round, updates the total score and lives.
    */
-  public int nextRound ()
+  public void nextRound ()
   {
     int tempScore = mBallsPopped;
     mRound++;
@@ -61,7 +61,6 @@ public class Boomshine
     mLives = mTotalLives;
     mBallsPopped = 0;
 
-    return tempScore;
   }
 
   /**

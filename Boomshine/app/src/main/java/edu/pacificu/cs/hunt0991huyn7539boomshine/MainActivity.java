@@ -10,7 +10,6 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
 /**
@@ -25,7 +24,6 @@ public class MainActivity extends AppCompatActivity
 {
   private Display mDisplay;
   private BoomshineView mBoomshineView;
-  private Button mbtnStart, mbtnHTP, mbtnQuit, mbtnTimedStart;
 
   @RequiresApi (api = Build.VERSION_CODES.R)
 
@@ -66,51 +64,22 @@ public class MainActivity extends AppCompatActivity
   {
     setContentView ( R.layout.activity_main );
 
-    mbtnStart = ( Button ) findViewById ( R.id.btnStart );
-    mbtnHTP = ( Button ) findViewById ( R.id.btnHowToPlay );
-    mbtnQuit = ( Button ) findViewById ( R.id.btnQuit );
-    mbtnTimedStart = ( Button ) findViewById ( R.id.btnTimedGame );
+    Button mbtnStart = (Button) findViewById(R.id.btnStart);
+    Button mbtnHTP = (Button) findViewById(R.id.btnHowToPlay);
+    Button mbtnQuit = (Button) findViewById(R.id.btnQuit);
+    Button mbtnTimedStart = (Button) findViewById(R.id.btnTimedGame);
 
-    mbtnStart.setOnClickListener ( new View.OnClickListener ()
-    {
-      @Override
-      public void onClick ( View view )
-      {
-        onBtnStart ( view );
-      }
-    } );
-    mbtnQuit.setOnClickListener ( new View.OnClickListener ()
-    {
-      @Override
-      public void onClick ( View view )
-      {
-        onBtnQuit ( view );
-      }
-    } );
-    mbtnHTP.setOnClickListener ( new View.OnClickListener ()
-    {
-      @Override
-      public void onClick ( View view )
-      {
-        onBtnHTP ( view );
-      }
-    } );
-    mbtnTimedStart.setOnClickListener ( new View.OnClickListener ()
-    {
-      @Override
-      public void onClick ( View view )
-      {
-        onBtnTimeStart ( view );
-      }
-    } );
+    mbtnStart.setOnClickListener (view -> onBtnStart ());
+    mbtnQuit.setOnClickListener (view -> onBtnQuit ());
+    mbtnHTP.setOnClickListener (view -> onBtnHTP ());
+    mbtnTimedStart.setOnClickListener (view -> onBtnTimeStart ());
   }
 
   /**
    * Inflates the how-to-play screen.
    *
-   * @param view The view to display.
    */
-  private void onBtnHTP ( View view )
+  private void onBtnHTP()
   {
     startActivity ( new Intent ( this, HowToPlay.class ) );
   }
@@ -118,9 +87,8 @@ public class MainActivity extends AppCompatActivity
   /**
    * Quits the program.
    *
-   * @param view The view to display.
    */
-  private void onBtnQuit ( View view )
+  private void onBtnQuit()
   {
     this.finish ();
   }
@@ -128,9 +96,8 @@ public class MainActivity extends AppCompatActivity
   /**
    * Inflates the Boomshines screen and starts game play.
    *
-   * @param view The view to display.
    */
-  private void onBtnStart ( View view )
+  private void onBtnStart()
   {
     mBoomshineView = new BoomshineView ( this, mDisplay );
     setContentView ( mBoomshineView );
@@ -140,9 +107,8 @@ public class MainActivity extends AppCompatActivity
   /**
    * Inflates the TimedBoomshines screen and starts game play.
    *
-   * @param view The view to display.
    */
-  private void onBtnTimeStart ( View view )
+  private void onBtnTimeStart()
   {
     mBoomshineView = new TimedBoomshineView ( this, mDisplay );
     setContentView ( mBoomshineView );

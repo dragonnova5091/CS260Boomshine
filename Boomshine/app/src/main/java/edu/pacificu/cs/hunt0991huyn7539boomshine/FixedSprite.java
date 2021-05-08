@@ -17,14 +17,13 @@ import android.widget.ImageView;
 public class FixedSprite extends ImageView
 {
   protected Bitmap mBitmapImage;
-  protected Bitmap mOGBitmap;
-  protected Display mDisplay;
+  protected final Bitmap mOGBitmap;
+  protected final Display mDisplay;
   private final int mResID;
   // integer computations are less expensive than double, so if your game doesn't
   // need any kind of precision, use ints. floats use less space than doubles
   protected double mXUpperLeft;
   protected double mYUpperLeft;
-  private final Context mContext;
   private static int mCount = 0;
   protected float mRadius;
 
@@ -51,7 +50,6 @@ public class FixedSprite extends ImageView
             drawable );
     mOGBitmap = mBitmapImage;
     mRadius = mBitmapImage.getWidth () / 2.0f;
-    mContext = context;
     mDisplay = display;
     mXUpperLeft = xUpperLeft;
     mYUpperLeft = yUpperLeft;
@@ -124,17 +122,6 @@ public class FixedSprite extends ImageView
   public double getXUpperLeft ()
   {
     return mXUpperLeft;
-  }
-
-  /**
-   * Retrieves the number of sprites created.
-   *
-   * @return number of sprites
-   * @since 1.0
-   */
-  public int getCount ()
-  {
-    return mCount;
   }
 
   /**
