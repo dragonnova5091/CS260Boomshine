@@ -103,12 +103,14 @@ public class BoomshineView extends View {
             mPaint.setTextSize(textSize);
             canvas.drawText("Total score: " + (mBoomshine.getTotalScore() +
                     mBoomshine.getBallsPopped()), 10, textSize + 10, mPaint);
-            canvas.drawText("Balls Needed: " + mBoomshine.getNumBallsForWin(), 10,
+            canvas.drawText( "Level: " + mBoomshine.getNumBallsForWin(), 10,
                     (textSize + 10) * 2, mPaint);
+            canvas.drawText("Balls Needed: " + mBoomshine.getNumBallsForWin(), 10,
+                    (textSize + 10) * 3, mPaint);
             canvas.drawText("Current Round Score: " + mBoomshine.getBallsPopped(),
-                    10, (textSize + 10) * 3, mPaint);
+                    10, (textSize + 10) * 4, mPaint);
             canvas.drawText("Lives: " + mBoomshine.getLives(), 10,
-                    (textSize + 10) * 4, mPaint);
+                    (textSize + 10) * 5, mPaint);
 
         } else {
             float tempint;
@@ -158,7 +160,7 @@ public class BoomshineView extends View {
         }
         if (!mbPlaying) {
             mBoomshine = new Boomshine();
-            reset();
+            startNewGame();
             mbPlaying = true;
         }
 
