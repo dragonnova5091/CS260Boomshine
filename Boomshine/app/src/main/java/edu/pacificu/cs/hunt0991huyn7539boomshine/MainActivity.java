@@ -36,11 +36,11 @@ public class MainActivity extends AppCompatActivity
    *                           Activity state
    */
   @Override
-  protected void onCreate (Bundle savedInstanceState)
+  protected void onCreate ( Bundle savedInstanceState )
   {
-    super.onCreate (savedInstanceState);
+    super.onCreate ( savedInstanceState );
 
-    mBoomshineView = new BoomshineView (this.getApplicationContext (), this.getDisplay ());
+    mBoomshineView = new BoomshineView ( this.getApplicationContext (), this.getDisplay () );
 
     mDisplay = this.getDisplay ();
 
@@ -62,43 +62,43 @@ public class MainActivity extends AppCompatActivity
    */
   private void onCreateMenuButtons ()
   {
-    setContentView (R.layout.activity_main);
+    setContentView ( R.layout.activity_main );
 
-    mbtnStart = (Button) findViewById (R.id.btnStart);
-    mbtnHTP = (Button) findViewById (R.id.btnHowToPlay);
-    mbtnQuit = (Button) findViewById (R.id.btnQuit);
-    mbtnTimedStart = (Button) findViewById (R.id.btnTimedGame);
+    mbtnStart = ( Button ) findViewById ( R.id.btnStart );
+    mbtnHTP = ( Button ) findViewById ( R.id.btnHowToPlay );
+    mbtnQuit = ( Button ) findViewById ( R.id.btnQuit );
+    mbtnTimedStart = ( Button ) findViewById ( R.id.btnTimedGame );
 
-    mbtnStart.setOnClickListener (new View.OnClickListener ()
+    mbtnStart.setOnClickListener ( new View.OnClickListener ()
     {
       @Override
-      public void onClick (View view)
+      public void onClick ( View view )
       {
-        onBtnStart (view);
+        onBtnStart ( view );
       }
     } );
-    mbtnQuit.setOnClickListener (new View.OnClickListener ()
+    mbtnQuit.setOnClickListener ( new View.OnClickListener ()
     {
       @Override
-      public void onClick (View view)
+      public void onClick ( View view )
       {
-        onBtnQuit (view);
+        onBtnQuit ( view );
       }
     } );
-    mbtnHTP.setOnClickListener (new View.OnClickListener ()
+    mbtnHTP.setOnClickListener ( new View.OnClickListener ()
     {
       @Override
-      public void onClick (View view)
+      public void onClick ( View view )
       {
-        onBtnHTP (view);
+        onBtnHTP ( view );
       }
     } );
-    mbtnTimedStart.setOnClickListener (new View.OnClickListener ()
+    mbtnTimedStart.setOnClickListener ( new View.OnClickListener ()
     {
       @Override
-      public void onClick (View view)
+      public void onClick ( View view )
       {
-        onBtnTimeStart (view);
+        onBtnTimeStart ( view );
       }
     } );
   }
@@ -108,9 +108,9 @@ public class MainActivity extends AppCompatActivity
    *
    * @param view The view to display.
    */
-  private void onBtnHTP (View view)
+  private void onBtnHTP ( View view )
   {
-    startActivity (new Intent (this, HowToPlay.class));
+    startActivity ( new Intent ( this, HowToPlay.class ) );
   }
 
   /**
@@ -118,9 +118,9 @@ public class MainActivity extends AppCompatActivity
    *
    * @param view The view to display.
    */
-  private void onBtnQuit (View view)
+  private void onBtnQuit ( View view )
   {
-    this.finish();
+    this.finish ();
   }
 
   /**
@@ -128,10 +128,11 @@ public class MainActivity extends AppCompatActivity
    *
    * @param view The view to display.
    */
-  private void onBtnStart (View view)
+  private void onBtnStart ( View view )
   {
-    setContentView( mBoomshineView );
-    mBoomshineView.startNewGame();
+    mBoomshineView = new BoomshineView ( this, mDisplay );
+    setContentView ( mBoomshineView );
+    mBoomshineView.startNewGame ();
   }
 
   /**
@@ -139,10 +140,10 @@ public class MainActivity extends AppCompatActivity
    *
    * @param view The view to display.
    */
-  private void onBtnTimeStart (View view)
+  private void onBtnTimeStart ( View view )
   {
-    mBoomshineView = new TimedBoomshineView (this, mDisplay);
-    setContentView (mBoomshineView);
+    mBoomshineView = new TimedBoomshineView ( this, mDisplay );
+    setContentView ( mBoomshineView );
     mBoomshineView.startNewGame ();
   }
 
@@ -152,11 +153,11 @@ public class MainActivity extends AppCompatActivity
    * @param menu the menu layout
    */
   @Override
-  public boolean onCreateOptionsMenu (Menu menu)
+  public boolean onCreateOptionsMenu ( Menu menu )
   {
 
     MenuInflater inflater = getMenuInflater ();
-    inflater.inflate (R.menu.hamburger_menu, menu);
+    inflater.inflate ( R.menu.hamburger_menu, menu );
 
     return true;
   }
@@ -168,16 +169,29 @@ public class MainActivity extends AppCompatActivity
    * @param item the item from menu to start
    */
   @Override
-  public boolean onOptionsItemSelected (final MenuItem item)
+  public boolean onOptionsItemSelected ( final MenuItem item )
   {
-    if (item.getItemId () == R.id.mainmenu)
+    if ( item.getItemId () == R.id.mainmenu )
     {
       onCreateMenuButtons ();
     }
-    else if (item.getItemId () == R.id.resetGame)
+    else if ( item.getItemId () == R.id.resetGame )
     {
       mBoomshineView.startNewGame ();
     }
+    else if ( item.getItemId () == R.id.normalgame )
+    {
+      mBoomshineView = new BoomshineView ( this, mDisplay );
+      setContentView ( mBoomshineView );
+      mBoomshineView.startNewGame ();
+    }
+    else if ( item.getItemId () == R.id.timedgame )
+    {
+      mBoomshineView = new TimedBoomshineView ( this, mDisplay );
+      setContentView ( mBoomshineView );
+      mBoomshineView.startNewGame ();
+    }
+
 
     return true;
   }

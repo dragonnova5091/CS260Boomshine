@@ -24,27 +24,27 @@ public class ExpandingBall extends MovingSprite
    * Initializes bounding member variables with passed-in values
    * after calling superclass constructor.
    *
-   * @param context     The calling context object
-   * @param display     The calling display object
-   * @param drawable    The drawable id value
-   * @param topCoord    The top coordinate of created circle
-   * @param leftCoord   The left coordinate of created circle
-   * @param xVel        The initial X speed of the created circle
-   * @param yVel        The initial Y speed of the created circle
-   * @param rate        The rate at the sprite expands
-   * @param radius      The initial radius of sprite
-   * @param max         The max radius can be.
+   * @param context   The calling context object
+   * @param display   The calling display object
+   * @param drawable  The drawable id value
+   * @param topCoord  The top coordinate of created circle
+   * @param leftCoord The left coordinate of created circle
+   * @param xVel      The initial X speed of the created circle
+   * @param yVel      The initial Y speed of the created circle
+   * @param rate      The rate at the sprite expands
+   * @param radius    The initial radius of sprite
+   * @param max       The max radius can be.
    */
-  public ExpandingBall (Context context, Display display, int drawable,
-                        int topCoord, int leftCoord, double xVel, double yVel,
-                        float rate, float radius, float max)
+  public ExpandingBall ( Context context, Display display, int drawable,
+                         int topCoord, int leftCoord, double xVel, double yVel,
+                         float rate, float radius, float max )
   {
-    super (context, display, drawable, topCoord, leftCoord, xVel, yVel);
+    super ( context, display, drawable, topCoord, leftCoord, xVel, yVel );
     mRate = rate;
     mMaxRadius = max;
     mRadius = radius;
-    setBitmap (Bitmap.createScaledBitmap (mBitmapImage, (int) mRadius,
-               (int) mRadius,true));
+    setBitmap ( Bitmap.createScaledBitmap ( mBitmapImage, ( int ) mRadius,
+            ( int ) mRadius, true ) );
   }
 
   /**
@@ -55,14 +55,14 @@ public class ExpandingBall extends MovingSprite
   public boolean expandBall ()
   {
     Bitmap scaledBMap;
-    if (bExpand)
+    if ( bExpand )
     {
       mRadius = mRadius + mRate;
 
-      setXUpperLeft( getXUpperLeft () - mRate );
-      setYUpperLeft( getYUpperLeft () - mRate );
+      setXUpperLeft ( getXUpperLeft () - mRate );
+      setYUpperLeft ( getYUpperLeft () - mRate );
 
-      if (mRadius >= mMaxRadius)
+      if ( mRadius >= mMaxRadius )
       {
         bExpand = false;
         mRadius = mMaxRadius;
@@ -71,21 +71,21 @@ public class ExpandingBall extends MovingSprite
     else
     {
       mRadius -= mRate;
-      setXUpperLeft (getXUpperLeft () + mRate);
-      setYUpperLeft (getYUpperLeft () + mRate);
+      setXUpperLeft ( getXUpperLeft () + mRate );
+      setYUpperLeft ( getYUpperLeft () + mRate );
     }
 
-    if (mRadius > 0)
+    if ( mRadius > 0 )
     {
-      scaledBMap = Bitmap.createScaledBitmap (getOGBitmap (), (int) mRadius * 2,
-              (int) mRadius * 2, true);
+      scaledBMap = Bitmap.createScaledBitmap ( getOGBitmap (), ( int ) mRadius * 2,
+              ( int ) mRadius * 2, true );
     }
     else
     {
-      scaledBMap = Bitmap.createScaledBitmap (getOGBitmap (), 1,
-              1, true);
+      scaledBMap = Bitmap.createScaledBitmap ( getOGBitmap (), 1,
+              1, true );
     }
-    setBitmap (scaledBMap);
+    setBitmap ( scaledBMap );
 
     return mRadius <= 0;
   }
@@ -105,17 +105,17 @@ public class ExpandingBall extends MovingSprite
    *
    * @return The sprites collided
    */
-  public boolean collide (BoundedBouncingBall mSprite)
+  public boolean collide ( BoundedBouncingBall mSprite )
   {
-    int xCenter = (int) mXUpperLeft + (int) mRadius;
-    int yCenter = (int) mYUpperLeft + (int) mRadius;
+    int xCenter = ( int ) mXUpperLeft + ( int ) mRadius;
+    int yCenter = ( int ) mYUpperLeft + ( int ) mRadius;
 
-    int spriteXCenter = (int) (mSprite.mXUpperLeft + mSprite.mRadius);
-    int spriteYCenter = (int) (mSprite.mYUpperLeft + mSprite.mRadius);
-    int spriteRadius = (int) mSprite.mRadius;
+    int spriteXCenter = ( int ) ( mSprite.mXUpperLeft + mSprite.mRadius );
+    int spriteYCenter = ( int ) ( mSprite.mYUpperLeft + mSprite.mRadius );
+    int spriteRadius = ( int ) mSprite.mRadius;
 
-    int centerDistance = (int) sqrt (((spriteXCenter - xCenter) * (spriteXCenter - xCenter))
-                                     + ((spriteYCenter - yCenter) * (spriteYCenter - yCenter)));
+    int centerDistance = ( int ) sqrt ( ( ( spriteXCenter - xCenter ) * ( spriteXCenter - xCenter ) )
+            + ( ( spriteYCenter - yCenter ) * ( spriteYCenter - yCenter ) ) );
 
     return centerDistance < mRadius + spriteRadius;
   }

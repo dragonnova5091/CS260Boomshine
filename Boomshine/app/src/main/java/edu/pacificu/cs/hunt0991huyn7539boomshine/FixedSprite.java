@@ -39,18 +39,18 @@ public class FixedSprite extends ImageView
    * @param yUpperLeft the y coordinate of the sprite
    * @since 1.0
    */
-  public FixedSprite( Context context, Display display, int drawable,
-                      double xUpperLeft, double yUpperLeft )
+  public FixedSprite ( Context context, Display display, int drawable,
+                       double xUpperLeft, double yUpperLeft )
 
   {
-    super( context );
+    super ( context );
 
-    BitmapFactory.Options opts = new BitmapFactory.Options();
+    BitmapFactory.Options opts = new BitmapFactory.Options ();
     opts.inJustDecodeBounds = true;
-    mBitmapImage = BitmapFactory.decodeResource( context.getResources(),
+    mBitmapImage = BitmapFactory.decodeResource ( context.getResources (),
             drawable );
     mOGBitmap = mBitmapImage;
-    mRadius = mBitmapImage.getWidth() / 2;
+    mRadius = mBitmapImage.getWidth () / 2;
     mContext = context;
     mDisplay = display;
     mXUpperLeft = xUpperLeft;
@@ -65,19 +65,22 @@ public class FixedSprite extends ImageView
    * @param canvas the canvas to draw to
    * @since 1.0
    */
-  public void doDraw( Canvas canvas )
+  public void doDraw ( Canvas canvas )
   {
-    canvas.drawBitmap( mBitmapImage, ( ( int ) this.mXUpperLeft ),
+    canvas.drawBitmap ( mBitmapImage, ( ( int ) this.mXUpperLeft ),
             ( int ) this.mYUpperLeft, null );
 
   }
 
-  public void setBitmap(Bitmap bm)
+  public void setBitmap ( Bitmap bm )
   {
     mBitmapImage = bm;
   }
 
-  public Bitmap getOGBitmap() { return mOGBitmap; }
+  public Bitmap getOGBitmap ()
+  {
+    return mOGBitmap;
+  }
 
   /**
    * Retrieves the sprite's reference id.
@@ -85,7 +88,7 @@ public class FixedSprite extends ImageView
    * @return the reference id
    * @since 1.0
    */
-  public int getResID()
+  public int getResID ()
   {
     return this.mResID;
   }
@@ -96,7 +99,7 @@ public class FixedSprite extends ImageView
    * @return the top y coordinate value
    * @since 1.0
    */
-  public double getYUpperLeft()
+  public double getYUpperLeft ()
   {
     return mYUpperLeft;
   }
@@ -107,7 +110,7 @@ public class FixedSprite extends ImageView
    * @return the left x coordinate value
    * @since 1.0
    */
-  public double getXUpperLeft()
+  public double getXUpperLeft ()
   {
     return mXUpperLeft;
   }
@@ -118,7 +121,7 @@ public class FixedSprite extends ImageView
    * @return number of sprites
    * @since 1.0
    */
-  public int getCount()
+  public int getCount ()
   {
     return mCount;
   }
@@ -129,9 +132,9 @@ public class FixedSprite extends ImageView
    * @return the width of the sprite
    * @since 1.0
    */
-  public int getSpriteWidth()
+  public int getSpriteWidth ()
   {
-    return mBitmapImage.getWidth();
+    return mBitmapImage.getWidth ();
   }
 
   /**
@@ -140,9 +143,9 @@ public class FixedSprite extends ImageView
    * @return the height of the sprite
    * @since 1.0
    */
-  public int getSpriteHeight()
+  public int getSpriteHeight ()
   {
-    return mBitmapImage.getHeight();
+    return mBitmapImage.getHeight ();
   }
 
   /**
@@ -154,7 +157,7 @@ public class FixedSprite extends ImageView
    * @return the radius of the sprite
    * @since 1.0
    */
-  public float getRadius()
+  public float getRadius ()
   {
     return mRadius;
   }

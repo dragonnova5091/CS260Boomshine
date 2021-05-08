@@ -25,18 +25,18 @@ public class TimedBoomshineView extends BoomshineView
    * @param context reference to application-specific resources
    * @param display the display
    */
-  public TimedBoomshineView (Context context, Display display)
+  public TimedBoomshineView ( Context context, Display display )
   {
-    super (context, display);
+    super ( context, display );
 
-    mTimer = new CountDownTimer (60000, 1000)
+    mTimer = new CountDownTimer ( 60000, 1000 )
     {
       /**
        * On every tick of the timer display time left.
        *
        * @param millisUntilFinished milliseconds left
        */
-      public void onTick (long millisUntilFinished)
+      public void onTick ( long millisUntilFinished )
       {
         mTimeleft = "" + millisUntilFinished / 1000;
       }
@@ -58,18 +58,18 @@ public class TimedBoomshineView extends BoomshineView
    * @param canvas used to host the draw calls
    */
   @Override
-  public void onDraw (Canvas canvas)
+  public void onDraw ( Canvas canvas )
   {
-    super.onDraw (canvas);
+    super.onDraw ( canvas );
 
     final int TEXT_SIZE = 24;
     float textSize = TEXT_SIZE * getResources ().getDisplayMetrics ().density;
 
-    mPaint.setColor (Color.BLACK);
-    mPaint.setTextSize (textSize);
+    mPaint.setColor ( Color.BLACK );
+    mPaint.setTextSize ( textSize );
 
-    canvas.drawText("Time: " + mTimeleft, 10,
-                 canvas.getHeight () - textSize - 10, mPaint);
+    canvas.drawText ( "Time: " + mTimeleft, 10,
+            canvas.getHeight () - textSize - 10, mPaint );
   }
 
   /**
@@ -79,19 +79,19 @@ public class TimedBoomshineView extends BoomshineView
    * @return true True if there was a click event
    */
   @Override
-  public boolean onTouchEvent (MotionEvent event)
+  public boolean onTouchEvent ( MotionEvent event )
   {
 
-    if (!mbPlaying)
+    if ( !mbPlaying )
     {
-      mTimer = new CountDownTimer (10000, 1000)
+      mTimer = new CountDownTimer ( 10000, 1000 )
       {
         /**
          * On every tick of the timer display time left.
          *
          * @param millisUntilFinished milliseconds left
          */
-        public void onTick (long millisUntilFinished)
+        public void onTick ( long millisUntilFinished )
         {
           mTimeleft = "" + millisUntilFinished / 1000;
         }
@@ -107,7 +107,7 @@ public class TimedBoomshineView extends BoomshineView
       }.start ();
     }
 
-    return super.onTouchEvent (event);
+    return super.onTouchEvent ( event );
   }
 
   /**

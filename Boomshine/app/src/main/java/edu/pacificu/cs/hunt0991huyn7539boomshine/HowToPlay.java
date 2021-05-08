@@ -16,18 +16,18 @@ public class HowToPlay extends Activity
    * @param savedInstanceState - passed for the parent
    */
   @Override
-  protected void onCreate (Bundle savedInstanceState)
+  protected void onCreate ( Bundle savedInstanceState )
   {
-    super.onCreate (savedInstanceState);
-    setContentView (R.layout.howtoplay_layout);
+    super.onCreate ( savedInstanceState );
+    setContentView ( R.layout.howtoplay_layout );
 
-    mBtnBack = (Button) findViewById (R.id.btnBack);
-    mBtnBack.setOnClickListener (new View.OnClickListener ()
+    mBtnBack = ( Button ) findViewById ( R.id.btnBack );
+    mBtnBack.setOnClickListener ( new View.OnClickListener ()
     {
       @Override
-      public void onClick (View view)
+      public void onClick ( View view )
       {
-        onBtnBack (view);
+        onBtnBack ( view );
       }
     } );
   }
@@ -37,7 +37,7 @@ public class HowToPlay extends Activity
    *
    * @param view - the view calling the function
    */
-  protected void onBtnBack (View view)
+  protected void onBtnBack ( View view )
   {
     this.finish ();
   }

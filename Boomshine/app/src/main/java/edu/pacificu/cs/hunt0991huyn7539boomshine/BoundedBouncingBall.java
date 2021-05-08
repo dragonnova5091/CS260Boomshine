@@ -14,67 +14,67 @@ import android.view.Display;
  */
 public class BoundedBouncingBall extends MovingSprite
 {
-    private int mTopBound, mBottomBound, mLeftBound, mRightBound;
+  private int mTopBound, mBottomBound, mLeftBound, mRightBound;
 
-    /**
-     * Initializes bounding member variables with passed-in values
-     * after calling superclass constructor.
-     *
-     * @param context     The calling context object
-     * @param display     The calling display object
-     * @param drawable    The drawable id value
-     * @param topCoord    The top coordinate of created circle
-     * @param leftCoord   The left coordinate of created circle
-     * @param xVel        The initial X speed of the created circle
-     * @param yVel        The initial Y speed of the created circle
-     * @param topBound    The top bound for the created circle
-     * @param botBound    The bottom bound for the created circle
-     * @param leftBound   The left bound for the created circle
-     * @param rightBound  The right bound for the created circle
-     */
-    public BoundedBouncingBall (Context context, Display display, int drawable,
+  /**
+   * Initializes bounding member variables with passed-in values
+   * after calling superclass constructor.
+   *
+   * @param context    The calling context object
+   * @param display    The calling display object
+   * @param drawable   The drawable id value
+   * @param topCoord   The top coordinate of created circle
+   * @param leftCoord  The left coordinate of created circle
+   * @param xVel       The initial X speed of the created circle
+   * @param yVel       The initial Y speed of the created circle
+   * @param topBound   The top bound for the created circle
+   * @param botBound   The bottom bound for the created circle
+   * @param leftBound  The left bound for the created circle
+   * @param rightBound The right bound for the created circle
+   */
+  public BoundedBouncingBall ( Context context, Display display, int drawable,
                                int topCoord, int leftCoord, double xVel, double yVel, int topBound,
-                               int botBound, int leftBound, int rightBound)
-    {
-        super (context, display, drawable, topCoord, leftCoord, xVel, yVel);
-        mTopBound = topBound;
-        mBottomBound = botBound;
-        mLeftBound = leftBound;
-        mRightBound = rightBound;
+                               int botBound, int leftBound, int rightBound )
+  {
+    super ( context, display, drawable, topCoord, leftCoord, xVel, yVel );
+    mTopBound = topBound;
+    mBottomBound = botBound;
+    mLeftBound = leftBound;
+    mRightBound = rightBound;
 
-        if (mXUpperLeft > mRightBound - getSpriteWidth ())
-        {
-            mXUpperLeft = mRightBound - getSpriteWidth ();
-        }
-        if (mYUpperLeft > mBottomBound - getSpriteHeight ())
-        {
-            mYUpperLeft = mBottomBound - getSpriteHeight ();
-        }
-    }
-
-    /**
-     * Changes moving sprite direction based on current direction and
-     * which bound was hit.
-     */
-    public void Bounce ()
+    if ( mXUpperLeft > mRightBound - getSpriteWidth () )
     {
-        final int CHANGE_DIRECTION = -1;
-        final int MULTIPLY_BY_TWO = 2;
-        if (getYUpperLeft () <= mTopBound)
-        {
-            mYVel = mYVel * CHANGE_DIRECTION;
-        }
-        if (getXUpperLeft () <= mLeftBound)
-        {
-            mXVel = mXVel * CHANGE_DIRECTION;
-        }
-        if ((mRadius * MULTIPLY_BY_TWO) + getYUpperLeft () >= mBottomBound)
-        {
-            mYVel = mYVel * CHANGE_DIRECTION;
-        }
-        if ((mRadius * MULTIPLY_BY_TWO) + getXUpperLeft () >= mRightBound)
-        {
-            mXVel = mXVel * CHANGE_DIRECTION;
-        }
+      mXUpperLeft = mRightBound - getSpriteWidth ();
     }
+    if ( mYUpperLeft > mBottomBound - getSpriteHeight () )
+    {
+      mYUpperLeft = mBottomBound - getSpriteHeight ();
+    }
+  }
+
+  /**
+   * Changes moving sprite direction based on current direction and
+   * which bound was hit.
+   */
+  public void Bounce ()
+  {
+    final int CHANGE_DIRECTION = -1;
+    final int MULTIPLY_BY_TWO = 2;
+    if ( getYUpperLeft () <= mTopBound )
+    {
+      mYVel = mYVel * CHANGE_DIRECTION;
+    }
+    if ( getXUpperLeft () <= mLeftBound )
+    {
+      mXVel = mXVel * CHANGE_DIRECTION;
+    }
+    if ( ( mRadius * MULTIPLY_BY_TWO ) + getYUpperLeft () >= mBottomBound )
+    {
+      mYVel = mYVel * CHANGE_DIRECTION;
+    }
+    if ( ( mRadius * MULTIPLY_BY_TWO ) + getXUpperLeft () >= mRightBound )
+    {
+      mXVel = mXVel * CHANGE_DIRECTION;
+    }
+  }
 }
