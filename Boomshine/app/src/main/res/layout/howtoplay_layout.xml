@@ -10,15 +10,16 @@
         android:id="@+id/howtoplay"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:textAlignment="center"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:inputType="textMultiLine"
-        android:text="@string/hottoplay_str"
+        android:text="To play game simply select a game mode from the main menu. When the game starts you will be allowed to tap the screen once to place a ball. The goal of the game is to clear as many balls as you can. You have 3 lives per round and will loose 1 life if you do not get the minimun amount of balls. Upon losing all lives the game will end. To restart tap on the screen to play a new game."
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center_horizontal" />
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/btnBack"
@@ -41,7 +42,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+        app:layout_constraintTop_toBottomOf="@+id/btnBack"
+        android:importantForAutofill="no" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

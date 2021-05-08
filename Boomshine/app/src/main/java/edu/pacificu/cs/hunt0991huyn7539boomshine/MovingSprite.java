@@ -7,7 +7,7 @@ import android.view.Display;
  * Defines the MovingSprite class which maintains the specifics of a sprite
  * including its location, size, and bitmap.
  *
- * @author Computer Science, Pacific University.
+ * @author Hung Huynh
  *
  * @version 1.0
  */

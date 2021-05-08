@@ -1,20 +1,16 @@
 package edu.pacificu.cs.hunt0991huyn7539boomshine;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Canvas;
 import android.util.Log;
-import android.view.Display;
-import android.view.MotionEvent;
-import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.ArrayList;
-
+/**
+ * Defines the Boomshine class that contains the Boomshine game logic.
+ *
+ * @author Hung Huynh And Ethan Hunter
+ * @version 1.0
+ * @since 5.8.2021
+ */
 public class Boomshine
 {
-
     private int mRound;
     private int mNumBallsForWin;
     private int mBallsPopped;
@@ -22,11 +18,12 @@ public class Boomshine
     private int mTotalLives;
     private int mLives;
 
-    //private GameOverLayoutActivity mGameOver;
-
-    public  Boomshine()
+    /**
+     * Initializes member variables to default values.
+     */
+    public  Boomshine ()
     {
-        Log.d("here", "constructor");
+        Log.d ("here", "constructor");
         mRound = 1;
         mNumBallsForWin = mRound;
         mBallsPopped = 0;
@@ -36,12 +33,10 @@ public class Boomshine
         mLives = mTotalLives;
     }
 
-    public void onDrawUI(Canvas canvas)
-    {
-
-    }
-
-    public int reset()
+    /**
+     * Resets to the current level.
+     */
+    public int reset ()
     {
         mNumBallsForWin = mRound;
         mLives--;
@@ -49,22 +44,15 @@ public class Boomshine
         return mLives;
     }
 
-
-
-    public void quit()
+    public void popOne ()
     {
-
-    }
-
-
-    public void popOne()
-    {
-
         mBallsPopped++;
     }
 
-
-    public int nextRound()
+    /**
+     * Moves the user on to the next round, updates the total score and lives.
+     */
+    public int nextRound ()
     {
         int tempScore = mBallsPopped;
         mRound++;
@@ -76,9 +64,31 @@ public class Boomshine
         return tempScore;
     }
 
-    public int getBallsPopped() { return mBallsPopped; }
-    public int getNumBallsForWin() { return  mNumBallsForWin; }
-    public int getTotalScore() { return mTotalScore; }
-    public int getLives() { return mLives; }
-    public void setLives(int lives) {mLives = lives; mTotalLives = lives;}
+    /**
+     * Returns the number of balls popped.
+     *
+     * @return mBallsPopped The number of balls popped.
+     */
+    public int getBallsPopped () { return mBallsPopped; }
+
+    /**
+     * Returns the number of balls to win round.
+     *
+     * @return mNumBallsForWin Number of balls to win.
+     */
+    public int getNumBallsForWin () { return mNumBallsForWin; }
+
+    /**
+     * Returns the Total Score.
+     *
+     * @return mTotalScore The total score.
+     */
+    public int getTotalScore () { return mTotalScore; }
+
+    /**
+     * Returns the number of lives.
+     *
+     * @return mLives Number of lives.
+     */
+    public int getLives () { return mLives; }
 }

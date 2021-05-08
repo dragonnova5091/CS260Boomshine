@@ -4,146 +4,179 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 
+/**
+ * Defines the MainActivity class that contains display and
+ * interaction logic for the Main Activity Screen.
+ *
+ * @author Hung Huynh
+ * @version 1.0
+ * @since 5.8.2021
+ */
 public class MainActivity extends AppCompatActivity
 {
   private Display mDisplay;
-
   private BoomshineView mBoomshineView;
-
   private Button mbtnStart, mbtnHTP, mbtnQuit, mbtnTimedStart;
 
-  @RequiresApi(api = Build.VERSION_CODES.R)
+  @RequiresApi (api = Build.VERSION_CODES.R)
+
+  /**
+   * Overrides the MainActivity.onCreate method. Inflates the menu screen.
+   *
+   * @param savedInstanceState A Bundle containing previously saved
+   *                           Activity state
+   */
   @Override
-  protected void onCreate( Bundle savedInstanceState )
+  protected void onCreate (Bundle savedInstanceState)
   {
-    super.onCreate( savedInstanceState );
+    super.onCreate (savedInstanceState);
 
-    mBoomshineView = new BoomshineView( this.getApplicationContext(), this.getDisplay() );
+    mBoomshineView = new BoomshineView (this.getApplicationContext (), this.getDisplay ());
 
-    mDisplay = this.getDisplay();
+    mDisplay = this.getDisplay ();
 
-    //startActivity (new Intent(this,
-      //      Boomshine.class));
-
-
-
-
-    onCreateMenuButtons();
-
+    onCreateMenuButtons ();
   }
 
+  /**
+   * Overrides the MainActivity.onPause method. Pauses Music
+   */
   @Override
-  protected void onPause()
+  protected void onPause ()
   {
-    super.onPause();
-    mBoomshineView.stopMusic();
+    super.onPause ();
+    mBoomshineView.stopMusic ();
   }
 
-  private void onCreateMenuButtons()
+  /**
+   * Overrides the MainActivity.onCreateMenuButtons method. inflates the menu buttons
+   */
+  private void onCreateMenuButtons ()
   {
-    setContentView( R.layout.activity_main );
+    setContentView (R.layout.activity_main);
 
+    mbtnStart = (Button) findViewById (R.id.btnStart);
+    mbtnHTP = (Button) findViewById (R.id.btnHowToPlay);
+    mbtnQuit = (Button) findViewById (R.id.btnQuit);
+    mbtnTimedStart = (Button) findViewById (R.id.btnTimedGame);
 
-    mbtnStart = (Button) findViewById( R.id.btnStart );
-    mbtnHTP = (Button) findViewById( R.id.btnHowToPlay );
-    mbtnQuit = (Button) findViewById( R.id.btnQuit);
-    mbtnTimedStart = (Button) findViewById( R.id.btnTimedGame );
-
-
-    mbtnStart.setOnClickListener( new View.OnClickListener()
+    mbtnStart.setOnClickListener (new View.OnClickListener ()
     {
       @Override
-      public void onClick( View view )
+      public void onClick (View view)
       {
-        onBtnStart( view );
+        onBtnStart (view);
       }
     } );
-    mbtnQuit.setOnClickListener( new View.OnClickListener()
+    mbtnQuit.setOnClickListener (new View.OnClickListener ()
     {
       @Override
-      public void onClick( View view )
+      public void onClick (View view)
       {
-        onBtnQuit( view );
+        onBtnQuit (view);
       }
     } );
-    mbtnHTP.setOnClickListener( new View.OnClickListener()
+    mbtnHTP.setOnClickListener (new View.OnClickListener ()
     {
       @Override
-      public void onClick( View view )
+      public void onClick (View view)
       {
-        onBtnHTP( view );
+        onBtnHTP (view);
       }
     } );
-    mbtnTimedStart.setOnClickListener( new View.OnClickListener()
+    mbtnTimedStart.setOnClickListener (new View.OnClickListener ()
     {
       @Override
-      public void onClick( View view )
+      public void onClick (View view)
       {
-        onBtnTimeStart( view );
+        onBtnTimeStart (view);
       }
     } );
   }
 
-  private void onBtnHTP( View view )
+  /**
+   * Inflates the how-to-play screen.
+   *
+   * @param view The view to display.
+   */
+  private void onBtnHTP (View view)
   {
-    //Log.d("htp", "start HTP Activity");
-    startActivity(new Intent(this, HowToPlay.class));
+    startActivity (new Intent (this, HowToPlay.class));
   }
 
-  private void onBtnQuit( View view )
+  /**
+   * Quits the program.
+   *
+   * @param view The view to display.
+   */
+  private void onBtnQuit (View view)
   {
-    //Log.d("quit", "trying to quit");
     this.finish();
   }
 
-  private void onBtnStart( View view )
+  /**
+   * Inflates the Boomshines screen and starts game play.
+   *
+   * @param view The view to display.
+   */
+  private void onBtnStart (View view)
   {
-    //Log.d("start", "start Boomshine View");
     setContentView( mBoomshineView );
     mBoomshineView.startNewGame();
   }
 
-  private void onBtnTimeStart(View view)
+  /**
+   * Inflates the TimedBoomshines screen and starts game play.
+   *
+   * @param view The view to display.
+   */
+  private void onBtnTimeStart (View view)
   {
-    mBoomshineView = new TimedBoomshineView( this, mDisplay );
-    setContentView( mBoomshineView );
-    mBoomshineView.startNewGame();
+    mBoomshineView = new TimedBoomshineView (this, mDisplay);
+    setContentView (mBoomshineView);
+    mBoomshineView.startNewGame ();
   }
 
+  /**
+   * Overrides the MainActivity.onCreateOptionsMenu method. Creates the drop down menu.
+   *
+   * @param menu the menu layout
+   */
   @Override
-  public boolean onCreateOptionsMenu( Menu menu )
+  public boolean onCreateOptionsMenu (Menu menu)
   {
 
-    MenuInflater inflater = getMenuInflater();
-    inflater.inflate( R.menu.hamburger_menu, menu );
+    MenuInflater inflater = getMenuInflater ();
+    inflater.inflate (R.menu.hamburger_menu, menu);
 
     return true;
   }
 
+  /**
+   * Overrides the MainActivity.onOptionsItemSelected method. Start the intents of the dropdown
+   * menu
+   *
+   * @param item the item from menu to start
+   */
   @Override
-  public boolean onOptionsItemSelected(final MenuItem item)
+  public boolean onOptionsItemSelected (final MenuItem item)
   {
-    if (item.getItemId() == R.id.mainmenu)
+    if (item.getItemId () == R.id.mainmenu)
     {
-      //mBoomshineView.stopMusic();
-      onCreateMenuButtons();
+      onCreateMenuButtons ();
     }
-    else if (item.getItemId() == R.id.resetGame)
+    else if (item.getItemId () == R.id.resetGame)
     {
-      mBoomshineView.startNewGame();
+      mBoomshineView.startNewGame ();
     }
 
     return true;

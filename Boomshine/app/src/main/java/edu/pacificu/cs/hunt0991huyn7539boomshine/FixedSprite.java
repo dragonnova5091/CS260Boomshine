@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.util.Log;
 import android.view.Display;
 import android.widget.ImageView;
 
@@ -26,15 +24,9 @@ public class FixedSprite extends ImageView
   // need any kind of precision, use ints. floats use less space than doubles
   protected double mXUpperLeft;
   protected double mYUpperLeft;
-  private int mWidth;
-  private int mHeight;
   private Context mContext;
   private static int mCount = 0;
   protected float mRadius;
-  private Paint mPaint;
-  private int mColor;
-  private float mOGRadius;
-  private boolean mFirst;
 
 
   /**
@@ -47,8 +39,6 @@ public class FixedSprite extends ImageView
    * @param yUpperLeft the y coordinate of the sprite
    * @since 1.0
    */
-//  public FixedSprite (Context context, Display display, int drawable,
-//                      int topCoord, int leftCoord)
   public FixedSprite( Context context, Display display, int drawable,
                       double xUpperLeft, double yUpperLeft )
 
@@ -65,7 +55,6 @@ public class FixedSprite extends ImageView
     mDisplay = display;
     mXUpperLeft = xUpperLeft;
     mYUpperLeft = yUpperLeft;
-    mFirst = true;
     mResID = drawable;
     ++mCount;
   }
@@ -83,20 +72,8 @@ public class FixedSprite extends ImageView
 
   }
 
-  /**
-   * Retrieves the bitmap.
-   *
-   * @return the bitmap
-   * @since 1.0
-   */
-  public Bitmap getBitmap()
-  {
-    return mBitmapImage;
-  }
-
   public void setBitmap(Bitmap bm)
   {
-    //mBitmapImage.recycle();
     mBitmapImage = bm;
   }
 
@@ -154,7 +131,6 @@ public class FixedSprite extends ImageView
    */
   public int getSpriteWidth()
   {
-    // return mWidth;
     return mBitmapImage.getWidth();
   }
 
@@ -166,7 +142,6 @@ public class FixedSprite extends ImageView
    */
   public int getSpriteHeight()
   {
-    // return mHeight;
     return mBitmapImage.getHeight();
   }
 
@@ -190,24 +165,4 @@ public class FixedSprite extends ImageView
    * @return the height of the display
    * @since 1.0
    */
-  public int getDisplayHeight()
-  {
-    return mContext.getResources().getDisplayMetrics().heightPixels;
-  }
-
-  /**
-   * Retrieves the width of the display.
-   *
-   * @return the width of the display
-   * @since 1.0
-   */
-  public int getDisplayWidth()
-  {
-    return mContext.getResources().getDisplayMetrics().widthPixels;
-  }
-
-  public float getOGRadius()
-  {
-    return mOGRadius;
-  }
 }
