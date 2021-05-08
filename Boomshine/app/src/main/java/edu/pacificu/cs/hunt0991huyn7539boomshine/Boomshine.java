@@ -18,10 +18,10 @@ public class Boomshine
     private int mRound;
     private int mNumBallsForWin;
     private int mBallsPopped;
-    private int mTotalScore;
+    protected int mTotalScore;
     private int mTotalLives;
     private int mLives;
-    private int mLastTotal;
+
     //private GameOverLayoutActivity mGameOver;
 
     public  Boomshine()
@@ -33,7 +33,6 @@ public class Boomshine
 
         mTotalScore = 0;
         mTotalLives = 3;
-        mLastTotal = 0;
         mLives = mTotalLives;
     }
 
@@ -57,10 +56,6 @@ public class Boomshine
 
     }
 
-    public void saveHighScore()
-    {
-
-    }
 
     public void popOne()
     {
@@ -85,4 +80,5 @@ public class Boomshine
     public int getNumBallsForWin() { return  mNumBallsForWin; }
     public int getTotalScore() { return mTotalScore; }
     public int getLives() { return mLives; }
+    public void setLives(int lives) {mLives = lives; mTotalLives = lives;}
 }
