@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -21,24 +23,24 @@ public class BoomshineView extends View {
     private final int LIVES = 3;
     private final int LEVEL_MULTIPLIER = 5;
     private double mVelocityMultiplier = 10;
+    private int mScreenWidth, mScreenHeight;
     private Boomshine mBoomshine;
-    private TimedBoomshine mTBoomshine;
     ArrayList<ExpandingBall> mExpanding;
     ArrayList<BoundedBouncingBall> mMoving;
-    private Paint mPaint;
+    protected Paint mPaint;
     private Context mContext;
     private Display mDisplay;
     protected int mHighscore;
     private boolean mbPlaced;
-    private boolean mbPlaying;
+    protected boolean mbPlaying;
     private MediaPlayer mMediaPlayer;
+    private MediaPlayer mBackgroundSound;
     private boolean mDonePlayingSound;
 
     public BoomshineView(Context context, Display display) {
         super(context);
         setFocusable(true);
         mBoomshine = new Boomshine();
-        mTBoomshine = new TimedBoomshine();
         mPaint = new Paint();
         mContext = context;
         mDisplay = display;
@@ -50,25 +52,41 @@ public class BoomshineView extends View {
         mHighscore = 0;
 
 
-        for (int i = 0; i < mBoomshine.getNumBallsForWin() * 2; i++) {
-            addMovingBall();
-        }
 
         invalidate();
     }
+
+    public void stopMusic()
+    {
+        mBackgroundSound.pause();
+        mMediaPlayer.pause();
+    }
+
+
 
     @Override
     public void onDraw(Canvas canvas) {
 
         final int TEXT_SIZE = 24;
         float textSize;
-        update();
 
-        if (mMediaPlayer == null)
+        if (mBackgroundSound == null)
         {
-            mMediaPlayer = MediaPlayer.create (getContext (), R.raw.main_music);
-            mMediaPlayer.start ();
+            mBackgroundSound = MediaPlayer.create( this.mContext, R.raw.main_music );
+            mBackgroundSound.start();
+            mBackgroundSound.setLooping( true );
         }
+
+
+        if (mMoving.size() == 0 && mExpanding.size() == 0)
+        {
+            for (int i = 0; i < mBoomshine.getNumBallsForWin() * 2; i++) {
+                addMovingBall(canvas);
+            }
+        }
+
+
+        update();
 
         for (int i = 0; i < mExpanding.size(); i++) {
             mExpanding.get(i).doDraw(canvas);
@@ -113,7 +131,7 @@ public class BoomshineView extends View {
 
         }
 
-        checkWin();
+        checkWin(canvas);
 
 
         invalidate();
@@ -121,19 +139,20 @@ public class BoomshineView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (mMediaPlayer != null)
-        {
-            mMediaPlayer.release ();
-        }
-        if (! mDonePlayingSound)
-        {
-            mMediaPlayer = MediaPlayer.create (getContext (), R.raw.click);
-            mMediaPlayer.start ();
-        }
+
         if (event.getAction() != MotionEvent.ACTION_DOWN) {
             return super.onTouchEvent(event);
         }
         if (!mbPlaced && mbPlaying) {
+
+
+            if (mMediaPlayer != null)
+            {
+                mMediaPlayer.release ();
+            }
+            mMediaPlayer = MediaPlayer.create (getContext(), R.raw.click);
+            mMediaPlayer.start();
+
             addExpandingBall(event);
             mbPlaced = true;
         }
@@ -147,11 +166,11 @@ public class BoomshineView extends View {
     }
 
 
-    public void checkWin() {
+    public void checkWin(Canvas canvas) {
         if (mbPlaced) {
             if (mExpanding.size() == 0 &&
                     mBoomshine.getBallsPopped() >= mBoomshine.getNumBallsForWin()) {
-                nextRound();
+                nextRound(canvas);
                 mbPlaced = false;
             } else if (mExpanding.size() == 0 &&
                     mBoomshine.getBallsPopped() < mBoomshine.getNumBallsForWin()) {
@@ -164,14 +183,14 @@ public class BoomshineView extends View {
 
     }
 
-    private void nextRound() {
+    private void nextRound(Canvas canvas) {
         mExpanding.clear();
         mMoving.clear();
 
         mBoomshine.nextRound();
 
         for (int i = 0; i < mBoomshine.getNumBallsForWin() * 2; i++) {
-            addMovingBall();
+            addMovingBall(canvas);
             invalidate();
         }
     }
@@ -186,7 +205,7 @@ public class BoomshineView extends View {
                         mMediaPlayer.release ();
                     }
                     mMediaPlayer = MediaPlayer.create (getContext(), R.raw.collision);
-                    mMediaPlayer.start ();
+                    mMediaPlayer.start();
                     addExpandingBall(mMoving.get(j));
 
                     mMoving.remove(j);
@@ -214,11 +233,6 @@ public class BoomshineView extends View {
 
         int tempint = mBoomshine.reset();
 
-        for (int i = 0; i < mBoomshine.getNumBallsForWin() * 2; i++) {
-            addMovingBall();
-            invalidate();
-        }
-
         return tempint;
     }
 
@@ -229,26 +243,23 @@ public class BoomshineView extends View {
         mbPlaying = true;
         mbPlaced = false;
 
-        for (int i = 0; i < mBoomshine.getNumBallsForWin() * 2; i++) {
-            addMovingBall();
-            invalidate();
-        }
+        invalidate();
     }
 
     public void quit() {
 
     }
 
-    private void addMovingBall() {
-        int width = mDisplay.getWidth();
-        int height = mDisplay.getHeight();
+    private void addMovingBall(Canvas canvas) {
+        mScreenHeight = canvas.getHeight();
+        mScreenWidth = canvas.getWidth();
         Random rand = new Random();
         int image = getRandImage();
         mMoving.add(new BoundedBouncingBall(mContext, mDisplay, image,
-                rand.nextInt(width), rand.nextInt(height),
+                rand.nextInt(mScreenWidth), rand.nextInt(mScreenHeight),
                 (rand.nextDouble() * 2 * mVelocityMultiplier) - mVelocityMultiplier,
                 (rand.nextDouble() * 2 * mVelocityMultiplier) - mVelocityMultiplier,
-                0, height, 0, width));
+                0, mScreenHeight, 0, mScreenWidth));
     }
 
     private void addExpandingBall(MotionEvent event) {

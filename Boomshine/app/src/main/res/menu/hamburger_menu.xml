@@ -5,4 +5,13 @@
 
     <item android:id="@+id/mainmenu"
         android:title="@string/mainmenu"/>
+    <item android:id="@+id/gamemodes"
+        android:title="@string/gamemodes">
+        <menu>
+            <item android:id="@+id/normalgame"
+                android:title="@string/normal" />
+            <item android:id="@+id/timedgame"
+                android:title="@string/timed" />
+        </menu>
+    </item>
 </menu>

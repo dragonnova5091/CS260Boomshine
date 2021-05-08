@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity
 
   private BoomshineView mBoomshineView;
 
-  private Button mbtnStart, mbtnHTP, mbtnQuit;
+  private Button mbtnStart, mbtnHTP, mbtnQuit, mbtnTimedStart;
 
   @RequiresApi(api = Build.VERSION_CODES.R)
   @Override
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
 
     mBoomshineView = new BoomshineView( this.getApplicationContext(), this.getDisplay() );
 
-
+    mDisplay = this.getDisplay();
 
     //startActivity (new Intent(this,
       //      Boomshine.class));
@@ -45,6 +45,13 @@ public class MainActivity extends AppCompatActivity
 
   }
 
+  @Override
+  protected void onPause()
+  {
+    super.onPause();
+    mBoomshineView.stopMusic();
+  }
+
   private void onCreateMenuButtons()
   {
     setContentView( R.layout.activity_main );
@@ -53,6 +60,7 @@ public class MainActivity extends AppCompatActivity
     mbtnStart = (Button) findViewById( R.id.btnStart );
     mbtnHTP = (Button) findViewById( R.id.btnHowToPlay );
     mbtnQuit = (Button) findViewById( R.id.btnQuit);
+    mbtnTimedStart = (Button) findViewById( R.id.btnTimedGame );
 
 
     mbtnStart.setOnClickListener( new View.OnClickListener()
@@ -79,6 +87,14 @@ public class MainActivity extends AppCompatActivity
         onBtnHTP( view );
       }
     } );
+    mbtnTimedStart.setOnClickListener( new View.OnClickListener()
+    {
+      @Override
+      public void onClick( View view )
+      {
+        onBtnTimeStart( view );
+      }
+    } );
   }
 
   private void onBtnHTP( View view )
@@ -100,6 +116,13 @@ public class MainActivity extends AppCompatActivity
     mBoomshineView.startNewGame();
   }
 
+  private void onBtnTimeStart(View view)
+  {
+    mBoomshineView = new TimedBoomshineView( this, mDisplay );
+    setContentView( mBoomshineView );
+    mBoomshineView.startNewGame();
+  }
+
   @Override
   public boolean onCreateOptionsMenu( Menu menu )
   {
@@ -115,6 +138,7 @@ public class MainActivity extends AppCompatActivity
   {
     if (item.getItemId() == R.id.mainmenu)
     {
+      //mBoomshineView.stopMusic();
       onCreateMenuButtons();
     }
     else if (item.getItemId() == R.id.resetGame)
